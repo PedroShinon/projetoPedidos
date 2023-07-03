@@ -10,31 +10,20 @@ class AuthService {
 
     public function register($request)
     {
-<<<<<<< HEAD
-        $typeUser = 'admin';
-=======
->>>>>>> 16fd2eb3d47665236a9daea1fe08d625299020ae
+        $typeUser = 'user';
         $user = User::create([
             'nome' => $request->nome,
             'nome_loja' => $request->nome_loja,
             'cnpj_cpf' => $request->cnpj_cpf,
             'telefone' => $request->telefone,
             'email' => $request->email,
-<<<<<<< HEAD
-            'tipo_usuario' => $typeUser,
-=======
             'tipo_usuario' => 'user',
->>>>>>> 16fd2eb3d47665236a9daea1fe08d625299020ae
             'logradouro' => $request->logradouro,
             'numero' => $request->numero,
             'bairro' => $request->bairro,
             'cidade' => $request->cidade,
-<<<<<<< HEAD
             'uf' => strtoupper($request->uf),
             'permissao' => $typeUser == 'user' ? true : false
-=======
-            'uf' => strtoupper($request->uf)
->>>>>>> 16fd2eb3d47665236a9daea1fe08d625299020ae
         ]);
            
         $token = $user->createToken('userAccess', ['user_privilege']);

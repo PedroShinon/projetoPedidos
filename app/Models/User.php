@@ -28,12 +28,8 @@ class User extends Authenticatable
         'numero',
         'bairro',
         'cidade',
-<<<<<<< HEAD
         'uf',
         'permissao'
-=======
-        'uf'
->>>>>>> 16fd2eb3d47665236a9daea1fe08d625299020ae
     ];
 
 
