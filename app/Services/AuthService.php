@@ -42,9 +42,9 @@ class AuthService {
 
             if($user->tipo_usuario == 'user'){
                 $token = $user->createToken('userAccess', ['user_privilege']);
-            } elseif ($user->role == 'admin') {
+            } elseif ($user->tipo_usuario == 'admin') {
                 $token = $user->createToken('adminAccess', ['admin_privilege']);
-            } elseif ($user->role == 'super'){
+            } elseif ($user->tipo_usuario == 'super'){
                 $token = $user->createToken('superAccess', ['super_privilege']);
             } else {
                 return [ 'message' => 'erro ao adquirir credenciais',
@@ -59,7 +59,6 @@ class AuthService {
                     'errors' => []
                     ];
         } else {
-
             return ['message' => 'credenciais incorretas','status' => 403,'data' => [],'errors' => []];
         }
 

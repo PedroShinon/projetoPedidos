@@ -28,7 +28,7 @@ Route::prefix('v1')->group(function(){
         Route::apiResource('/users', UserController::class);
 
         //super-admin(super_privilege)Provider
-        Route::middleware(['can:admin_privilege'])->group(function(){
+        Route::middleware(['can:super_privilege'])->group(function(){
             Route::post('/admin/register',[AuthController::class, 'adminRegister']);
             
         });
