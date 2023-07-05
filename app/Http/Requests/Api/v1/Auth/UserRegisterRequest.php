@@ -23,7 +23,7 @@ class UserRegisterRequest extends FormRequest
     {
         return [
             'nome' => ['required', 'max:100' ],
-            'nome_loja' => ['required', 'max:100' ],
+            'nome_loja' => ['required', 'max:100'],
             'email' => ['required', 'email', 'max:100' ],
             'cnpj_cpf' => ['required', 'unique:users,cnpj_cpf', 'min:11', 'max:14'],
             'telefone' => ['required', 'min:9' , 'max:21' ],

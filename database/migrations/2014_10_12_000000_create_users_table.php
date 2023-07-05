@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('uf', 2);
             $table->string('tipo_usuario', 20)->default('user');
             $table->boolean('permissao')->default(false);
+            $table->boolean('fiado')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

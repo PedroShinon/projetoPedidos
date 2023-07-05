@@ -23,7 +23,8 @@ class AuthService {
             'bairro' => $request->bairro,
             'cidade' => $request->cidade,
             'uf' => strtoupper($request->uf),
-            'permissao' => $typeUser == 'user' ? true : false
+            'permissao' => $typeUser == 'user' ? true : false,
+            'fiado' => false
         ]);
            
         $token = $user->createToken('userAccess', ['user_privilege']);
@@ -37,13 +38,13 @@ class AuthService {
     public function login($request)
     {
         $user = User::where('cnpj_cpf', $request->cnpj_cpf)->firstOrFail();
-        if ($user) {
+        if ($user && $user->permissao == true) {
             $user->tokens()->delete();
 
             if($user->tipo_usuario == 'user'){
                 $token = $user->createToken('userAccess', ['user_privilege']);
-            } elseif ($user->tipo_usuario == 'admin') {
-                $token = $user->createToken('adminAccess', ['admin_privilege']);
+            } elseif ($user->tipo_usuario == 'assist') {
+                $token = $user->createToken('assistAccess', ['assist_privilege']);
             } elseif ($user->tipo_usuario == 'super'){
                 $token = $user->createToken('superAccess', ['super_privilege']);
             } else {
@@ -59,7 +60,7 @@ class AuthService {
                     'errors' => []
                     ];
         } else {
-            return ['message' => 'credenciais incorretas','status' => 403,'data' => [],'errors' => []];
+            return ['message' => 'credenciais incorretas, permissão inválida','status' => 403,'data' => [],'errors' => []];
         }
 
     }
