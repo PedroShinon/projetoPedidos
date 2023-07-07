@@ -5,14 +5,23 @@ namespace App\Services;
 use App\Models\User;
 use App\Models\Endereco;
 use Illuminate\Support\Facades\Hash;
-
+use App\Filter\v1\User\UserQuery;
 
 
 class UserService {
 
-    public function getAll()
+    public function getAll($request)
     {
-        return User::all();
+        $filter = new UserQuery();
+        $queryItems = $filter->transform($request); //[['column', 'operator', 'value']]
+
+        if (count($queryItems) == 0) {
+            $users = User::all();
+            return $users;
+        } else {
+            $users = User::where($queryItems)->get();
+            return $users;
+        }
     }
 
     public function getById($id)

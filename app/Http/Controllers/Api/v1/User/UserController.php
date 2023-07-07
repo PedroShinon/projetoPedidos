@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Services\UserService;
 use App\Http\Requests\Api\v1\User\UserUpdateRequest;
 use App\Http\Resources\Api\v1\User\UserResource;
+use App\Models\User;
+
+use App\Filter\v1\User\UserQuery;
 
 class UserController extends Controller
 {
@@ -22,9 +25,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
 
-        if(!$users = $this->userService->getAll()){
-             return response()->json(['message' => 'nenhum dado encontrado', 'status' => 404]); 
-        }
+        $users = $this->userService->getAll($request);
         return UserResource::make(['message' => 'Usuarios coletados', 'status' => 200, 'data' => $users]);
         
     }
