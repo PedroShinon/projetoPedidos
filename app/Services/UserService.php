@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\User;
-use App\Models\Endereco;
 use Illuminate\Support\Facades\Hash;
 use App\Filter\v1\User\UserQuery;
 

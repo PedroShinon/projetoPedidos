@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\v1\Auth\AuthController;
 use App\Http\Controllers\Api\v1\User\UserController;
+use App\Http\Controllers\Api\v1\Category\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,7 @@ Route::prefix('v1')->group(function(){
         Route::post('/logout',[AuthController::class, 'logout']);
         
         Route::apiResource('/users', UserController::class);
+        Route::apiResource('/categorys', CategoryController::class);
 
         //super-admin(super_privilege)Provider
         Route::middleware(['can:assist_privilege'])->group(function(){
