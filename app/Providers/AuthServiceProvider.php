@@ -25,13 +25,13 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
 
-        Gate::define('super_privilege', function(User $user){
-            return $user->tipo_usuario == 'super';
+        Gate::define('admin_privilege', function(User $user){
+            return $user->tipo_usuario == 'admin';
         });
 
         Gate::define('assist_privilege', function(User $user){
             //return $user->tokenCan('user_privilege');
-            return $user->tipo_usuario == 'assist' || $user->tipo_usuario == 'super';
+            return $user->tipo_usuario == 'assist' || $user->tipo_usuario == 'admin';
         });
 
     }

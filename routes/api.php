@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\v1\Auth\AuthController;
 use App\Http\Controllers\Api\v1\User\UserController;
 use App\Http\Controllers\Api\v1\Category\CategoryController;
+use App\Http\Controllers\Api\v1\Color\ColorController;
+use App\Http\Controllers\Api\v1\Product\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +30,8 @@ Route::prefix('v1')->group(function(){
         
         Route::apiResource('/users', UserController::class);
         Route::apiResource('/categorys', CategoryController::class);
+        Route::apiResource('/colors', ColorController::class);
+        Route::apiResource('/products', ProductController::class);
 
         //super-admin(super_privilege)Provider
         Route::middleware(['can:assist_privilege'])->group(function(){
@@ -36,7 +40,7 @@ Route::prefix('v1')->group(function(){
         });
 
         //super-admin(super_privilege)Provider
-        Route::middleware(['can:super_privilege'])->group(function(){
+        Route::middleware(['can:admin_privilege'])->group(function(){
             Route::post('/admin/register',[AuthController::class, 'adminRegister']);
             
         });

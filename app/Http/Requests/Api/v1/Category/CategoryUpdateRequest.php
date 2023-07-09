@@ -25,7 +25,7 @@ class CategoryUpdateRequest extends FormRequest
             'nome' => ['required', 'max:255'],
             'descricao' => ['required', 'max:255'],
             'image' => ['nullable'],
-            'status' => ['nullable'],
+            'visivel' => ['nullable'],
             
         ];
     }

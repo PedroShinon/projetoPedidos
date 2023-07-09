@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('colors', function (Blueprint $table) {
             $table->id();
-            $table->string('nome');
-            $table->longText('descricao');
-            $table->string('image')->nullable();
-            $table->boolean('visivel')->default(true)->comment('1 = visible, 0 = hidden');
+            $table->string('cor');
+            $table->string('hexdecimal');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('colors');
     }
 };

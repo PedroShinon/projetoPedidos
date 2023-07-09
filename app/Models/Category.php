@@ -13,11 +13,18 @@ class Category extends Model
         'nome',
         'descricao',
         'image',
-        'status',
+        'visivel',
+    ];
+
+    protected $casts = [
+        'visivel' => 'boolean',
     ];
 
     public function products()
     {
         return $this->hasMany(Product::class, 'category_id', 'id');
     }
+
+
+    
 }

@@ -15,9 +15,13 @@ class Product extends Model
         'modelo',
         'descricao',
         'preco_atual',
-        'quantidade',
         'destaque',
         'status'
+    ];
+
+    protected $casts = [
+        'destque' => 'boolean',
+        'status' => 'boolean'
     ];
 
     public function products()

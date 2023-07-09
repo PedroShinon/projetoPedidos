@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Api\v1\Category;
+namespace App\Http\Requests\Api\v1\Color;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryCreateRequest extends FormRequest
+class ColorCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +22,8 @@ class CategoryCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome' => ['required', 'max:255'],
-            'descricao' => ['required', 'max:255'],
-            'image' => ['nullable'],
-            'visivel' => ['nullable'],
-            
+            'cor' => ['required'],
+            'hexdecimal' => ['required', 'max:10']
         ];
     }
 }

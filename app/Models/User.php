@@ -50,6 +50,8 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
+        'fiado' => 'boolean',
+        'permissao' => 'boolean',
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];

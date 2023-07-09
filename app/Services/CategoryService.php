@@ -29,7 +29,7 @@ class CategoryService {
             'nome' => $request->nome,
             'descricao' => $request->descricao,
             'image' => $request->image,
-            'status' => $request->status ?? false,
+            'visivel' => $request->visivel ?? true,
         ]);
 
         return $category;
@@ -49,7 +49,7 @@ class CategoryService {
             'nome' => $request->nome ?? $category->nome,
             'descricao' => $request->descricao ?? $category->descricao,
             'image' => $request->image ?? $category->image,
-            'status' => $request->status ?? $category->status,
+            'visivel' => $request->visivel ?? $category->visivel,
         ]);
         return $category;
       }

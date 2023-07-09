@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Api\v1\Category;
+namespace App\Http\Requests\Api\v1\Product;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryCreateRequest extends FormRequest
+class ProductCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +22,14 @@ class CategoryCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'category_id' => ['required'],
             'nome' => ['required', 'max:255'],
+            'marca' => ['required', 'max:255'],
+            'modelo' => ['required', 'max:255'],
             'descricao' => ['required', 'max:255'],
-            'image' => ['nullable'],
-            'visivel' => ['nullable'],
-            
+            'preco_atual' => ['required', 'integer'],
+            'destaque' => ['nullable'],
+            'status' => ['nullable']
         ];
     }
 }

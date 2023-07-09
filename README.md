@@ -225,7 +225,7 @@ Ato LOGAR USUÁRIO:
             "cidade": "São Luís",
             "uf": "MA",
             "tipo_usuario": "user",
-            "permissao": 1,
+            "permissao": true,
             "created_at": "2023-07-06T19:21:55.000000Z",
             "updated_at": "2023-07-06T19:21:55.000000Z"
         },
@@ -308,7 +308,7 @@ Ato PEGAR TODOS OS USERS USUÁRIO:
             "cidade": "São Luís",
             "uf": "MA",
             "tipo_usuario": "user",
-            "permissao": 1,
+            "permissao": true,
             "created_at": "2023-07-06T19:21:55.000000Z",
             "updated_at": "2023-07-06T19:21:55.000000Z"
         }
@@ -341,7 +341,7 @@ Ato GET ONE USER USUÁRIO (APENAS UM):
         "cidade": "São Luís",
         "uf": "MA",
         "tipo_usuario": "user",
-        "permissao": 1,
+        "permissao": true,
         "created_at": "2023-07-06T19:21:55.000000Z",
         "updated_at": "2023-07-06T19:21:55.000000Z"
     }
@@ -416,7 +416,7 @@ Ato GET ONE USER (ATUALIZAR) USUÁRIO:
         "cidade": "São Luís",
         "uf": "MA",
         "tipo_usuario": "user",
-        "permissao": 1,
+        "permissao": true,
         "created_at": "2023-07-06T20:01:52.000000Z",
         "updated_at": "2023-07-06T20:03:31.000000Z"
     }
@@ -428,7 +428,7 @@ Ato GET ONE USER (ATUALIZAR) USUÁRIO:
     		"status": 404
 	}
 
-
+############################### FILTRO ############################################
     Ato FILTRAR USERS POR CAMPOS (FILTRO) USUÁRIO:
 	VERBOSE: PUT / PATCH
 	URL: http://127.0.0.1:8000/api/v1/users?:campo[:operador]=:dado_a_ser_filtrado
@@ -471,7 +471,7 @@ Ato GET ONE USER (ATUALIZAR) USUÁRIO:
                     "cidade": "São Luís",
                     "uf": "SP",
                     "tipo_usuario": "user",
-                    "permissao": 0,
+                    "permissao": true,
                     "created_at": "2023-07-07T11:46:06.000000Z",
                     "updated_at": "2023-07-07T11:46:06.000000Z"
                 }
