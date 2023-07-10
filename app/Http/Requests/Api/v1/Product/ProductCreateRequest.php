@@ -21,15 +21,17 @@ class ProductCreateRequest extends FormRequest
      */
     public function rules(): array
     {
+        
         return [
             'category_id' => ['required'],
             'nome' => ['required', 'max:255'],
             'marca' => ['required', 'max:255'],
             'modelo' => ['required', 'max:255'],
             'descricao' => ['required', 'max:255'],
-            'preco_atual' => ['required', 'integer'],
+            'preco_atual' => ['required', 'decimal:2'],
             'destaque' => ['nullable'],
-            'status' => ['nullable']
+            'status' => ['nullable'],
+            'image' =>['nullable']
         ];
     }
 }

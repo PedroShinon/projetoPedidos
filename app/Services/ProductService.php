@@ -26,6 +26,7 @@ class ProductService {
 
     public function create($request)
     {
+        
         $category = Category::find($request->category_id);
         if (!$category) {
             return false;
@@ -40,7 +41,27 @@ class ProductService {
             'destaque' => $request->destaque ?? false,
             'status' => $request->status ?? false,
         ]);
+        if($request->file('image')){    
+            
+            //dd($request->file('image'));
+            
+            $uploadPath = 'storage/products/';
 
+            $i = 1;
+            foreach($request->file('image') as $imageFile){
+                //dd($imageFile);
+                //$imageFile = $request->file('image');
+                $extension = $imageFile->getClientOriginalExtension();
+                $filename = time().$i++.'.'.$extension;
+                $imageFile->move($uploadPath, $filename);
+                $finalImagePathName = $uploadPath.$filename;
+
+                $product->productImages()->create([
+                    'product_id' => $product->id,
+                    'image' => $finalImagePathName,
+                ]);
+            }
+        }
         return $product;
     }
 

@@ -21,10 +21,10 @@ class CategoryUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
+
         return [
-            'nome' => ['required', 'max:255'],
-            'descricao' => ['required', 'max:255'],
-            'image' => ['nullable'],
+            'nome' => ['sometimes', 'max:255'],
+            'descricao' => ['sometimes', 'max:255'],
             'visivel' => ['nullable'],
             
         ];

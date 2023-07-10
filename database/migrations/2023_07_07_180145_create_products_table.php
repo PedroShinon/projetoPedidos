@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('marca');
             $table->string('modelo');
             $table->longText('descricao');
-            $table->integer('preco_atual');
+            $table->decimal('preco_atual', 12, 2);
             $table->boolean('destaque')->default(false)->comment('1 = destaque, 0 = sem_destaque');
             $table->boolean('status')->default(false)->comment('1 = invisivel, 0 = visivel');
 

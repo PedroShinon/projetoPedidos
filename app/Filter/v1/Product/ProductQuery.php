@@ -14,7 +14,6 @@ class ProductQuery extends Filter {
         'modelo' => ['eq', 'ne', 'lk'],
         'descricao' => ['eq', 'ne', 'lk'],
         'preco_atual' => ['eq', 'ne', 'lk', 'gt', 'lt', 'gte', 'lte'],
-        'quantidade' => ['eq', 'ne', 'lk', 'gt', 'lt', 'gte', 'lte'],
         'destaque' => ['eq', 'ne'],
         'status' => ['eq', 'ne'],
     ];
@@ -31,7 +30,7 @@ class ProductQuery extends Filter {
         'gt' => '>',
         'lt' => '<',
         'gte' => '>=',
-        'lte' => '=<',
+        'lte' => '<=',
     ];
 
 }

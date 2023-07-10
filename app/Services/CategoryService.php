@@ -9,6 +9,7 @@ use App\Filter\v1\Category\CategoryQuery;
 
 class CategoryService {
 
+
     public function getAll($request)
     {
         $filter = new CategoryQuery();
@@ -25,12 +26,11 @@ class CategoryService {
 
     public function create($request)
     {
-        $category = Category::create([
-            'nome' => $request->nome,
-            'descricao' => $request->descricao,
-            'image' => $request->image,
-            'visivel' => $request->visivel ?? true,
-        ]);
+        $category = new Category;
+        $category->nome = $request->nome;
+        $category->descricao = $request->descricao;
+        $category->visivel = $request->visivel ?? true;
+        $category->save();
 
         return $category;
 
@@ -43,14 +43,14 @@ class CategoryService {
 
     public function update($request, $id)
     {
+
       $category = Category::find($id);
       if($category){
-        $category->update([
-            'nome' => $request->nome ?? $category->nome,
-            'descricao' => $request->descricao ?? $category->descricao,
-            'image' => $request->image ?? $category->image,
-            'visivel' => $request->visivel ?? $category->visivel,
-        ]);
+
+        $category->nome = $request->nome ?? $category->nome;
+        $category->descricao = $request->descricao ?? $category->descricao;
+        $category->visivel = $request->visivel ?? $category->visivel;
+        $category->save();
         return $category;
       }
       return false;
