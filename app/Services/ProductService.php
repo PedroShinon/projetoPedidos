@@ -3,9 +3,11 @@
 namespace App\Services;
 
 use App\Models\Product;
+use App\Models\ProductImage;
 use App\Models\Category;
 use Illuminate\Support\Facades\Hash;
 use App\Filter\v1\Product\ProductQuery;
+use Illuminate\Support\Facades\File;
 
 
 class ProductService {
@@ -37,13 +39,12 @@ class ProductService {
             'marca' => $request->marca,
             'modelo' => $request->modelo,
             'descricao' => $request->descricao,
+            'preco_original' => $request->preco_original,
             'preco_atual' => $request->preco_atual,
             'destaque' => $request->destaque ?? false,
             'status' => $request->status ?? false,
         ]);
         if($request->file('image')){    
-            
-            //dd($request->file('image'));
             
             $uploadPath = 'storage/products/';
 
@@ -79,10 +80,28 @@ class ProductService {
             'marca' => $request->marca ?? $product->marca,
             'modelo' => $request->modelo ?? $product->modelo,
             'descricao' => $request->descricao ?? $product->descricao,
+            'preco_original' => $request->preco_original ?? $product->preco_original,
             'preco_atual' => $request->preco_atual ?? $product->preco_atual,
             'destaque' => $request->destaque ?? $product->destaque,
             'status' => $request->status ?? $product->status,
         ]);
+        if($request->file('image')){
+            $uploadPath = 'storage/products/';
+
+            $i = 1;
+            foreach($request->file('image') as $imageFile){
+                $extension = $imageFile->getClientOriginalExtension();
+                $filename = time().$i++.'.'.$extension;
+                $imageFile->move($uploadPath, $filename);
+                $finalImagePathName = $uploadPath.$filename;
+
+                $product->productImages()->create([
+                    'product_id' => $product->id,
+                    'image' => $finalImagePathName,
+                ]);
+            }
+        }
+
         return $product;
       }
       return false;
@@ -90,7 +109,15 @@ class ProductService {
 
     public function delete($id): void
     {
-        $product = Product::findOrFail($id);
+        $product = Product::find($id);
+        $imagens = ProductImage::where('product_id', $id)->get();
+        if (count($imagens) > 0) {
+            foreach ($imagens as $imagem) {
+                if(File::exists($imagem->image)){
+                    File::delete($imagem->image);
+                }
+            }
+        }
         $product->delete();
     }
 }

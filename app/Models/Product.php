@@ -14,6 +14,7 @@ class Product extends Model
         'marca',
         'modelo',
         'descricao',
+        'preco_original',
         'preco_atual',
         'destaque',
         'status'
