@@ -48,14 +48,14 @@ class ProductService {
             'status' => $request->status ?? false,
         ]);
         if($request->file('image')){    
-
+            $uploadPath = 'storage/products/';
             $i = 1;
             foreach($request->file('image') as $imageFile){
                 //dd($imageFile);
                 //$imageFile = $request->file('image');
                 $extension = $imageFile->getClientOriginalExtension();
                 $filename = time().$i++.'.'.$extension;
-                $imageFile->move($this->uploadPath, $filename);
+                $imageFile->move($uploadPath, $filename);
                 $finalImagePathName = $uploadPath.$filename;
 
                 $product->productImages()->create([
@@ -99,12 +99,12 @@ class ProductService {
             'status' => $request->status ?? $product->status,
         ]);
         if($request->file('image')){
-
+            $uploadPath = 'storage/products/';
             $i = 1;
             foreach($request->file('image') as $imageFile){
                 $extension = $imageFile->getClientOriginalExtension();
                 $filename = time().$i++.'.'.$extension;
-                $imageFile->move($this->uploadPath, $filename);
+                $imageFile->move($uploadPath, $filename);
                 $finalImagePathName = $uploadPath.$filename;
 
                 $product->productImages()->create([

@@ -12,6 +12,7 @@ class ProductQuery extends Filter {
         'nome' => ['eq', 'ne', 'lk'],
         'marca' => ['eq', 'ne', 'lk'],
         'user_id' => ['eq', 'ne'],
+        'category_id' => ['eq', 'ne'],
         'modelo' => ['eq', 'ne', 'lk'],
         'descricao' => ['eq', 'ne', 'lk'],
         'preco_atual' => ['eq', 'ne', 'lk', 'gt', 'lt', 'gte', 'lte'],
