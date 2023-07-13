@@ -42,11 +42,10 @@ class AuthController extends Controller
         return response()->json($user); 
     }
 
-    public function adminRegister(AdminRegisterRequest $request)
-    {   
-        $request->validated();
-        $user = $this->authService->adminRegister($request);
-        return response()->json($user); 
+    public function changePermission(Request $request)
+    {
+        $user = $this->authService->changePermission($request);
+        return response()->json($user);
     }
 
  

@@ -17,6 +17,7 @@ class Product extends Model
         'preco_original',
         'preco_atual',
         'destaque',
+        'user_id',
         'status'
     ];
 
@@ -28,6 +29,16 @@ class Product extends Model
     public function products()
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+
+    public function productsCreator()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function productVariant()
+    {
+        return $this->hasMany(ProductVariant::class, 'product_id', 'id');
     }
 
     public function productImages()

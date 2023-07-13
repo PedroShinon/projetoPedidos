@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\File;
 
 class ProductService {
 
+    protected $uploadPath = 'storage/products/';
+
     public function getAll($request)
     {
         $filter = new ProductQuery();
@@ -35,6 +37,7 @@ class ProductService {
         }
         $product = $category->products()->create([
             'category_id' => $request->category_id,
+            'user_id' => $request->user()->id,
             'nome' => $request->nome,
             'marca' => $request->marca,
             'modelo' => $request->modelo,
@@ -45,8 +48,6 @@ class ProductService {
             'status' => $request->status ?? false,
         ]);
         if($request->file('image')){    
-            
-            $uploadPath = 'storage/products/';
 
             $i = 1;
             foreach($request->file('image') as $imageFile){
@@ -54,7 +55,7 @@ class ProductService {
                 //$imageFile = $request->file('image');
                 $extension = $imageFile->getClientOriginalExtension();
                 $filename = time().$i++.'.'.$extension;
-                $imageFile->move($uploadPath, $filename);
+                $imageFile->move($this->uploadPath, $filename);
                 $finalImagePathName = $uploadPath.$filename;
 
                 $product->productImages()->create([
@@ -63,6 +64,18 @@ class ProductService {
                 ]);
             }
         }
+
+        if($request->variants){
+            foreach($request->variants as $key => $variant){
+                $product->productVariant()->create([
+                    'product_id' => $product->id,
+                    'color_id' => $variant,
+                    'quantidade' => $request->variantQuantity[$key] ?? 0
+                ]);
+            }
+                
+        }
+
         return $product;
     }
 
@@ -86,13 +99,12 @@ class ProductService {
             'status' => $request->status ?? $product->status,
         ]);
         if($request->file('image')){
-            $uploadPath = 'storage/products/';
 
             $i = 1;
             foreach($request->file('image') as $imageFile){
                 $extension = $imageFile->getClientOriginalExtension();
                 $filename = time().$i++.'.'.$extension;
-                $imageFile->move($uploadPath, $filename);
+                $imageFile->move($this->uploadPath, $filename);
                 $finalImagePathName = $uploadPath.$filename;
 
                 $product->productImages()->create([

@@ -40,10 +40,8 @@ Route::prefix('v1')->group(function(){
         });
 
         //super-admin(super_privilege)Provider
-        Route::middleware(['can:admin_privilege'])->group(function(){
-            Route::post('/admin/register',[AuthController::class, 'adminRegister']);
-            
-        });
+        Route::post('/admin/changePermission',[AuthController::class, 'changePermission']);
+        
 
 
     });

@@ -31,7 +31,7 @@ class AuthService {
         $token = $user->createToken('assistAccess', ['assist_privilege']);
         return ['message' => 'Usuario criado',
                  'status' => 200 ,
-                 'data' => ['user' => $user, 'token' => $token],
+                 'data' => ['user' => $user],
                  'errors' => []
                 ];
     }
@@ -46,8 +46,8 @@ class AuthService {
                 $token = $user->createToken('userAccess', ['user_privilege']);
             } elseif ($user->tipo_usuario == 'assist') {
                 $token = $user->createToken('assistAccess', ['assist_privilege']);
-            } elseif ($user->tipo_usuario == 'super'){
-                $token = $user->createToken('superAccess', ['super_privilege']);
+            } elseif ($user->tipo_usuario == 'admin'){
+                $token = $user->createToken('adminAccess', ['admin_privilege']);
             } else {
                 return [ 'message' => 'erro ao adquirir credenciais',
                 'status' => 403,
@@ -72,24 +72,33 @@ class AuthService {
     }
 
     //admin
-    public function adminRegister($request)
+
+    public function changePermission($request)
     {
-        if ($request->user()->tokenCan('super_privilege')) {
-            $user = User::create([
-                'firstName' => $request->firstName,
-                'lastName' => $request->lastName,
-                'email' => $request->email,
-                'role' => 1,
-                'password' => Hash::make($request->password)
-            ]);
-            $token = $user->createToken('adminAccess', ['admin_privilege']);
-            return [ 'message' => 'Usuario criado',
-                    'status' => 200 ,
-                    'data' => ['user' => $user, 'token' => $token],
-                    'errors' => []
-                    ];
+        if ($request->user()->tokenCan('admin_privilege')) {
+            $user = User::where('id', $request->id)->first();
+            if($user){
+                if($user->permissao == false){
+                    $user->update([
+                        'permissao' => 1
+                    ]);
+                } else {
+                    $user->update([
+                        'permissao' => 0
+                    ]);
+                }
+                return [ 'message' => 'Permissão alterada',
+                'status' => 204
+                ];
+            
+            }else {
+                return [ 'message' => 'Não encontrado',
+                'status' => 403
+                ];
+            }
+            
         }
-            return [ 'message' => 'Sem autorização',
+            return [ 'message' => 'Sem autorização para realizar ação',
             'status' => 403,
             'data' => [],
             'errors' => []
