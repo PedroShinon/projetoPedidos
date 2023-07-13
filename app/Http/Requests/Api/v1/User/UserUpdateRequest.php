@@ -21,11 +21,12 @@ class UserUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->id ?? '';
 
         return [
             'nome' => ['sometimes','required', 'max:100' ],
             'nome_loja' => ['sometimes','required', 'max:100' ],
-            'email' => ['sometimes','required', 'email', 'max:100' ],
+            'email' => ['sometimes','required', 'email', 'unique:users,email,{$id},id', 'max:100' ],
             'telefone' => ['sometimes','required', 'min:9' , 'max:21' ],
             'logradouro' => ['sometimes','required', 'max:200'],
             'numero' => ['sometimes','required', 'max:20'],
@@ -33,5 +34,6 @@ class UserUpdateRequest extends FormRequest
             'cidade' => ['sometimes','required', 'max:100'],
             'uf' => ['sometimes','required', 'max:2']
         ];
+        
     }
 }
