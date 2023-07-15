@@ -55,7 +55,7 @@ class AuthService {
                 ];
             }
             return ['message' => 'Usuario logado',
-                    'status' => 202,
+                    'status' => 200,
                     'data' => ['user' => $user, 'token' => $token],
                     'errors' => []
                     ];
