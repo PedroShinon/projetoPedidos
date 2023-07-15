@@ -22,7 +22,7 @@ class UserLoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'cnpj_cpf' => ['required', 'exists:users,cnpj_cpf' , 'min:11' ],   
+            'cnpj_cpf' => ['required', 'min:11' ],   
         ];
     }
 }

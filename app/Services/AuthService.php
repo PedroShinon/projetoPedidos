@@ -38,29 +38,34 @@ class AuthService {
     public function login($request)
     {
         $user = User::where('cnpj_cpf', $request->cnpj_cpf)->first();
-        if ($user && $user->permissao == true) {
-            $user->tokens()->delete();
+        if ($user) {
+            if ($user->permissao == true) {
+                $user->tokens()->delete();
 
-            if($user->tipo_usuario == 'user'){
-                $token = $user->createToken('userAccess', ['user_privilege']);
-            } elseif ($user->tipo_usuario == 'assist') {
-                $token = $user->createToken('assistAccess', ['assist_privilege']);
-            } elseif ($user->tipo_usuario == 'admin'){
-                $token = $user->createToken('adminAccess', ['admin_privilege']);
-            } else {
-                return [ 'message' => 'erro ao adquirir credenciais',
-                'status' => 401,
-                'data' => [],
-                'errors' => []
-                ];
-            }
-            return ['message' => 'Usuario logado',
-                    'status' => 200,
-                    'data' => ['user' => $user, 'token' => $token],
+                if($user->tipo_usuario == 'user'){
+                    $token = $user->createToken('userAccess', ['user_privilege']);
+                } elseif ($user->tipo_usuario == 'assist') {
+                    $token = $user->createToken('assistAccess', ['assist_privilege']);
+                } elseif ($user->tipo_usuario == 'admin'){
+                    $token = $user->createToken('adminAccess', ['admin_privilege']);
+                } else {
+                    return [ 'message' => 'erro ao adquirir credenciais',
+                    'status' => 401,
+                    'data' => [],
                     'errors' => []
                     ];
+                }
+                return ['message' => 'Usuario logado',
+                        'status' => 200,
+                        'data' => ['user' => $user, 'token' => $token],
+                        'errors' => []
+                        ];
+            } else {
+                return ['message' => 'Permissão invalida','status' => 401,'data' => [],'errors' => []];
+            }
+
         } else {
-            return ['message' => 'credenciais incorretas, permissão inválida','status' => 401,'data' => [],'errors' => []];
+            return ['message' => 'Credenciais incorretas','status' => 404,'data' => [],'errors' => []];
         }
 
     }
