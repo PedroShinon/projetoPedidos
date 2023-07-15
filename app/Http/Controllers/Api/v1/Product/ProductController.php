@@ -25,7 +25,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $products = $this->productService->getAll($request);
-        return ProductResource::collection($products);
+        return ProductResource::collection($products)->response()->setStatusCode(200);
     }
 
     /**
@@ -35,7 +35,7 @@ class ProductController extends Controller
     {
         if(!$product = $this->productService->create($request))
         {
-            return response()->json(['message' => 'não foi possivel criar', 'status' => 403]);
+            return response()->json(['message' => 'não foi possivel criar'], 403);
         }
         return ProductResource::make($product);
     }
@@ -46,7 +46,7 @@ class ProductController extends Controller
     public function show(string $id)
     {
         if(!$product = $this->productService->getById($id)){
-            return response()->json(['message' => 'Nenhum dado encontrado', 'status' => 404]);  
+            return response()->json(['message' => 'Nenhum dado encontrado'], 404);  
          }
          return ProductResource::make($product); 
     }
@@ -58,9 +58,9 @@ class ProductController extends Controller
     {
         $request->validated();
         if($product = $this->productService->update($request, $id)){
-            return ProductResource::make($product); 
+            return ProductResource::make($product)->response()->setStatusCode(202); 
         }
-        return response()->json(['message' => 'dado não foi encontrado', 'status' => 404]); 
+        return response()->json(['message' => 'dado não foi encontrado'], 404); 
     }
 
     /**
@@ -70,8 +70,10 @@ class ProductController extends Controller
     {
         if($this->productService->getById($id)){
             $this->productService->delete($id);
-             return response()->json(['message' => 'Produto deletado', 'status' => 204]);
+             return response()->json(['message' => 'Produto deletado'], 204);
          }
-         return response()->json(['message' => 'dado não foi encontrado', 'status' => 404]); 
+         return response()->json(['message' => 'dado não foi encontrado'], 404); 
     }
+
+
 }

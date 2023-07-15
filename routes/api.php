@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\v1\User\UserController;
 use App\Http\Controllers\Api\v1\Category\CategoryController;
 use App\Http\Controllers\Api\v1\Color\ColorController;
 use App\Http\Controllers\Api\v1\Product\ProductController;
+use App\Http\Controllers\Api\v1\ProductImage\ProductImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,7 @@ Route::prefix('v1')->group(function(){
         Route::apiResource('/categorys', CategoryController::class);
         Route::apiResource('/colors', ColorController::class);
         Route::apiResource('/products', ProductController::class);
+        Route::apiResource('/productsImages', ProductImageController::class);
 
         //super-admin(super_privilege)Provider
         Route::middleware(['can:assist_privilege'])->group(function(){
@@ -42,8 +44,6 @@ Route::prefix('v1')->group(function(){
         //super-admin(super_privilege)Provider
         Route::post('/admin/changePermission',[AuthController::class, 'changePermission']);
         
-
-
     });
 
 });

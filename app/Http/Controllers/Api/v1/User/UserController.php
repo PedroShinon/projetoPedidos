@@ -24,10 +24,8 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-
         $users = $this->userService->getAll($request);
-        return UserResource::make(['message' => 'Usuarios coletados', 'status' => 200, 'data' => $users]);
-        
+        return UserResource::make(['message' => 'Usuarios coletados','data' => $users])->response()->setStatusCode(200);
     }
 
     /**
@@ -45,9 +43,9 @@ class UserController extends Controller
     {
         
         if(!$user = $this->userService->getById($id)){
-           return response()->json(['message' => 'Nenhum dado encontrado', 'status' => 404]);  
+           return response()->json(['message' => 'Nenhum dado encontrado'], 404);  
         }
-        return UserResource::make(['message' => 'Usuarios coletado', 'status' => 200, 'data' => $user]); 
+        return UserResource::make(['message' => 'Usuarios coletado','data' => $user])->response()->setStatusCode(200); 
         
     }
 
@@ -58,9 +56,9 @@ class UserController extends Controller
     {
         $request->validated();
         if($user = $this->userService->update($request, $id)){
-            return UserResource::make(['message' => 'Usuarios atualizado', 'status' => 200, 'data' => $user]); 
+            return UserResource::make(['message' => 'Usuarios atualizado', 'data' => $user])->response()->setStatusCode(202); 
         }
-        return response()->json(['message' => 'dado não foi encontrado', 'status' => 404]); 
+        return response()->json(['message' => 'dado não foi encontrado'], 404); 
     }
 
     /**
@@ -70,8 +68,8 @@ class UserController extends Controller
     {
         if($this->userService->getById($id)){
            $this->userService->delete($id);
-            return response()->json(['message' => 'Usuário deletado', 'status' => 204]);
+            return response()->json(['message' => 'Usuário deletado'], 204);
         }
-        return response()->json(['message' => 'dado não foi encontrado', 'status' => 404]); 
+        return response()->json(['message' => 'dado não foi encontrado'], 404); 
     }
 }

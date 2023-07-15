@@ -23,7 +23,7 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         $categorys = $this->categoryService->getAll($request);
-        return CategoryResource::make(['message' => 'categorias coletadas', 'status' => 200, 'data' => $categorys]);
+        return CategoryResource::make(['message' => 'categorias coletadas','data' => $categorys])->response()->setStatusCode(200);
     }
 
     /**
@@ -33,9 +33,9 @@ class CategoryController extends Controller
     {
         if(!$category = $this->categoryService->create($request))
         {
-            return CategoryResource::make(['message' => 'não foi possivel criar', 'status' => 403]);
+            return CategoryResource::make(['message' => 'não foi possivel criar'])->response()->setStatusCode(403);
         }
-        return CategoryResource::make(['message' => 'categoria criada', 'status' => 200, 'data' => $category]);
+        return CategoryResource::make(['message' => 'categoria criada', 'data' => $category])->response()->setStatusCode(201);
     }
 
     /**
@@ -44,9 +44,9 @@ class CategoryController extends Controller
     public function show(string $id)
     {
         if(!$category = $this->categoryService->getById($id)){
-            return response()->json(['message' => 'Nenhum dado encontrado', 'status' => 404]);  
+            return response()->json(['message' => 'Nenhum dado encontrado'], 404);  
          }
-         return CategoryResource::make(['message' => 'Categoria coletado', 'status' => 200, 'data' => $category]); 
+         return CategoryResource::make(['message' => 'Categoria coletado','data' => $category])->response()->setStatusCode(200); 
     }
 
     /**
@@ -56,9 +56,9 @@ class CategoryController extends Controller
     {
         $request->validated();
         if($category = $this->categoryService->update($request, $id)){
-            return CategoryResource::make(['message' => 'Categoria atualizada', 'status' => 200, 'data' => $category]); 
+            return CategoryResource::make(['message' => 'Categoria atualizada', 'data' => $category])->response()->setStatusCode(202); 
         }
-        return response()->json(['message' => 'dado não foi encontrado', 'status' => 404]); 
+        return response()->json(['message' => 'dado não foi encontrado'], 404); 
     }
 
     /**
@@ -68,8 +68,8 @@ class CategoryController extends Controller
     {
         if($this->categoryService->getById($id)){
             $this->categoryService->delete($id);
-             return response()->json(['message' => 'Categoria deletada', 'status' => 204]);
+             return response()->json(['message' => 'Categoria deletada'], 204);
          }
-         return response()->json(['message' => 'dado não foi encontrado', 'status' => 404]); 
+         return response()->json(['message' => 'dado não foi encontrado'], 404); 
     }
 }

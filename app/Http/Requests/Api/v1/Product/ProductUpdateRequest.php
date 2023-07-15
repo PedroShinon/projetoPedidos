@@ -22,7 +22,6 @@ class ProductUpdateRequest extends FormRequest
     public function rules(): array
     {
         //$this->preco_atual = str_replace('.', ',', $this->preco_atual);
-        
         return [
             'category_id' => ['required'],
             'nome' => ['sometimes', 'max:255'],

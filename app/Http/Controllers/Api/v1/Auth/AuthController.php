@@ -26,26 +26,26 @@ class AuthController extends Controller
     {
         $request->validated();
         $user = $this->authService->login($request);
-        return response()->json($user); 
+        return response()->json($user,$user['status']); 
     }
 
     public function register(UserRegisterRequest $request)
     {
         $request->validated();
         $user = $this->authService->register($request);
-        return response()->json($user);   
+        return response()->json($user,$user['status']);   
     }
 
     public function logout(Request $request)
     {
         $user = $this->authService->logout($request);
-        return response()->json($user); 
+        return response()->json($user, $user['status']); 
     }
 
     public function changePermission(Request $request)
     {
         $user = $this->authService->changePermission($request);
-        return response()->json($user);
+        return response()->json($user, $user['status']);
     }
 
  

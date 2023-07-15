@@ -36,9 +36,9 @@ class ColorController extends Controller
     {
         if(!$color = $this->colorService->create($request))
         {
-            return ColorResource::make(['message' => 'não foi possivel criar', 'status' => 403]);
+            return ColorResource::make(['message' => 'não foi possivel criar'])->response()->setStatusCode(403);
         }
-        return ColorResource::make(['message' => 'cor criada', 'status' => 200, 'data' => $color]);
+        return ColorResource::make(['message' => 'cor criada', 'data' => $color])->response()->setStatusCode(201);
     }
 
     /**
@@ -47,9 +47,9 @@ class ColorController extends Controller
     public function show(string $id)
     {
         if(!$color = $this->colorService->getById($id)){
-            return response()->json(['message' => 'Nenhum dado encontrado', 'status' => 404]);  
+            return response()->json(['message' => 'Nenhum dado encontrado'], 404);  
          }
-         return ColorResource::make(['message' => 'Categoria coletado', 'status' => 200, 'data' => $color]); 
+         return ColorResource::make(['message' => 'Categoria coletado','data' => $color])->response()->setStatusCode(200); 
     }
 
     /**
@@ -59,9 +59,9 @@ class ColorController extends Controller
     {
         $request->validated();
         if($color = $this->colorService->update($request, $id)){
-            return ColorResource::make(['message' => 'Cor atualizada', 'status' => 200, 'data' => $color]); 
+            return ColorResource::make(['message' => 'Cor atualizada', 'data' => $color])->response()->setStatusCode(202); 
         }
-        return response()->json(['message' => 'dado não foi encontrado', 'status' => 404]); 
+        return response()->json(['message' => 'dado não foi encontrado'], 404); 
     }
 
     /**
@@ -71,8 +71,8 @@ class ColorController extends Controller
     {
         if($this->colorService->getById($id)){
             $this->colorService->delete($id);
-             return response()->json(['message' => 'Cor deletada', 'status' => 204]);
+             return response()->json(['message' => 'Cor deletada'], 204);
          }
-         return response()->json(['message' => 'dado não foi encontrado', 'status' => 404]); 
+         return response()->json(['message' => 'dado não foi encontrado'], 404); 
     }
 }

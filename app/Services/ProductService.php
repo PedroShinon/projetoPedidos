@@ -114,6 +114,17 @@ class ProductService {
             }
         }
 
+        if($request->variants){
+            foreach($request->variants as $key => $variant){
+                $product->productVariant()->create([
+                    'product_id' => $product->id,
+                    'color_id' => $variant,
+                    'quantidade' => $request->variantQuantity[$key] ?? 0
+                ]);
+            }
+                
+        }
+
         return $product;
       }
       return false;
@@ -132,4 +143,5 @@ class ProductService {
         }
         $product->delete();
     }
+
 }

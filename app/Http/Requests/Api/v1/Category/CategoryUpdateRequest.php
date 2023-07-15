@@ -21,7 +21,6 @@ class CategoryUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-
         return [
             'nome' => ['sometimes', 'max:255'],
             'descricao' => ['sometimes', 'max:255'],

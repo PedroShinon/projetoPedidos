@@ -28,9 +28,8 @@ class AuthService {
             'fiado' => false
         ]);
            
-        $token = $user->createToken('assistAccess', ['assist_privilege']);
         return ['message' => 'Usuario criado',
-                 'status' => 200 ,
+                'status' => 201,
                  'data' => ['user' => $user],
                  'errors' => []
                 ];
@@ -38,7 +37,7 @@ class AuthService {
 
     public function login($request)
     {
-        $user = User::where('cnpj_cpf', $request->cnpj_cpf)->firstOrFail();
+        $user = User::where('cnpj_cpf', $request->cnpj_cpf)->first();
         if ($user && $user->permissao == true) {
             $user->tokens()->delete();
 
@@ -50,18 +49,18 @@ class AuthService {
                 $token = $user->createToken('adminAccess', ['admin_privilege']);
             } else {
                 return [ 'message' => 'erro ao adquirir credenciais',
-                'status' => 403,
+                'status' => 401,
                 'data' => [],
                 'errors' => []
                 ];
             }
             return ['message' => 'Usuario logado',
-                    'status' => 200,
+                    'status' => 202,
                     'data' => ['user' => $user, 'token' => $token],
                     'errors' => []
                     ];
         } else {
-            return ['message' => 'credenciais incorretas, permissão inválida','status' => 403,'data' => [],'errors' => []];
+            return ['message' => 'credenciais incorretas, permissão inválida','status' => 401,'data' => [],'errors' => []];
         }
 
     }
@@ -76,8 +75,7 @@ class AuthService {
     public function changePermission($request)
     {
         if ($request->user()->tokenCan('admin_privilege')) {
-            $user = User::where('id', $request->id)->first();
-            if($user){
+            if($user = User::where('id', $request->id)->first()){
                 if($user->permissao == false){
                     $user->update([
                         'permissao' => 1
@@ -93,16 +91,13 @@ class AuthService {
             
             }else {
                 return [ 'message' => 'Não encontrado',
-                'status' => 403
+                'status' => 404
                 ];
             }
             
         }
             return [ 'message' => 'Sem autorização para realizar ação',
-            'status' => 403,
-            'data' => [],
-            'errors' => []
-            ];
+            'status' => 403];
     }
 
 
