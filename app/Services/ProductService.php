@@ -23,7 +23,7 @@ class ProductService {
             $products = Product::all();
             return $products;
         } else {
-            $products = Product::where($queryItems)->get();
+            $products = Product::with('productImages')->where($queryItems)->get();
             return $products;
         }
     }
@@ -64,7 +64,7 @@ class ProductService {
                 ]);
             }
         }
-
+        //PAROU BEM AQUI JOÃO PEDRO
         if($request->variants){
             foreach($request->variants as $key => $variant){
                 $product->productVariant()->create([

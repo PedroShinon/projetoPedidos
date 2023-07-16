@@ -488,3 +488,37 @@ Ato GET ONE USER (ATUALIZAR) USUÁRIO:
         "data": []
     }
 
+
+    ############################### PERMISSÃO ############################################
+    Ato ALTERAR A PERMISSÃO DE LOGIN NO SISTEMA:
+	VERBOSE: POST
+	URL: http://127.0.0.1:8000/api/v1/admin/changePermission
+	EM BODY: envia-se o campo de nome "id", com valor em formato integer.
+
+    EM CASO DE ID NÃO ENCONTRADO RETORNA:
+    {
+    "message": "Não encontrado",
+    "status": 404
+    }
+
+    EM CASO DE USUARIO NÃO AUTORIZADO A REALIZAR A AÇÃO:
+    {
+    "message": "Sem autorização para realizar ação",
+    "status": 403
+    }
+
+    EM CASO DE TOKEN AUTORIZADO E ID EXISTENTE ENVIADO:
+    {
+    "message": "Permissão alterada",
+    "status": 202,
+    "permissao": "false"
+    }
+    ## OU ##
+    {
+    "message": "Permissão alterada",
+    "status": 202,
+    "permissao": "true"
+}
+
+
+

@@ -28,6 +28,27 @@ class UserService {
         return User::find($id);
     }
 
+    public function create($request)
+    {
+        $user = new User;
+        $user->nome = $request->nome;
+        $user->cnpj_cpf = $request->cnpj_cpf;
+        $user->nome_loja = $request->nome_loja;
+        $user->email = $request->email;
+        $user->telefone = $request->telefone;
+        $user->logradouro = $request->logradouro;
+        $user->tipo_usuario = $request->tipo_usuario;
+        $user->numero = $request->numero;
+        $user->bairro = $request->bairro;
+        $user->cidade = $request->cidade;
+        $user->permissao = $request->permissao;
+        $user->uf = strtoupper($request->uf);
+        $user->save();
+
+        return $user;
+
+    }
+
     public function update($request, $id)
     {
       $user = User::find($id);

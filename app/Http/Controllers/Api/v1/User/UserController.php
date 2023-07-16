@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\UserService;
 use App\Http\Requests\Api\v1\User\UserUpdateRequest;
+use App\Http\Requests\Api\v1\User\UserCreateRequest;
 use App\Http\Resources\Api\v1\User\UserResource;
 use App\Models\User;
 
@@ -31,9 +32,13 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserCreateRequest $request)
     {
-        //
+        if(!$user = $this->userService->create($request))
+        {
+            return UserResource::make(['message' => 'não foi possivel criar'])->response()->setStatusCode(403);
+        }
+        return UserResource::make(['message' => 'usuario criado', 'data' => $user])->response()->setStatusCode(201);
     }
 
     /**

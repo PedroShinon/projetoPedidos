@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nome');
             $table->string('marca');
             $table->string('modelo');
-            $table->longText('descricao');
+            $table->longText('descricao')->nullable()->default(null);
             $table->decimal('preco_original', 12, 2)->nullable()->default(null);
             $table->decimal('preco_atual', 12, 2);
             $table->boolean('destaque')->default(false)->comment('1 = destaque, 0 = sem_destaque');

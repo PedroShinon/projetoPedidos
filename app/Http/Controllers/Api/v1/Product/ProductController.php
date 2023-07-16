@@ -25,6 +25,9 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $products = $this->productService->getAll($request);
+        if (!$products) {
+            return response()->json(['message' => 'não foi encontrado produtos'], 404);
+        }
         return ProductResource::collection($products)->response()->setStatusCode(200);
     }
 
@@ -37,7 +40,7 @@ class ProductController extends Controller
         {
             return response()->json(['message' => 'não foi possivel criar'], 403);
         }
-        return ProductResource::make($product);
+        return ProductResource::make($product)->response()->setStatusCode(201);
     }
 
     /**
@@ -48,7 +51,7 @@ class ProductController extends Controller
         if(!$product = $this->productService->getById($id)){
             return response()->json(['message' => 'Nenhum dado encontrado'], 404);  
          }
-         return ProductResource::make($product); 
+         return ProductResource::make($product)->response()->setStatusCode(200); 
     }
 
     /**

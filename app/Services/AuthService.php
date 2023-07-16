@@ -91,7 +91,8 @@ class AuthService {
                     ]);
                 }
                 return [ 'message' => 'Permissão alterada',
-                'status' => 204
+                'status' => 202,
+                'permissao' => $user->permissao ? 'true':'false'
                 ];
             
             }else {
