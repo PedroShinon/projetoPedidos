@@ -26,8 +26,8 @@ class ProductResource extends JsonResource
             'descricao' => $this->descricao,
             'destaque' => $this->destaque,
             'status' => $this->status,
-            'images' => $this->productImages,
-            'atributos' => $this->productVariant,
+            'images' => $this->whenLoaded('productImages'),
+            'atributos' => $this->whenLoaded('attributes'),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

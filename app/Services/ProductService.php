@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Models\Attribute;
+use App\Models\AttributeValue;
 use App\Models\Category;
 use Illuminate\Support\Facades\Hash;
 use App\Filter\v1\Product\ProductQuery;
@@ -20,10 +22,10 @@ class ProductService {
         $queryItems = $filter->transform($request); //[['column', 'operator', 'value']]
 
         if (count($queryItems) == 0) {
-            $products = Product::all();
+            $products = Product::with('productImages')->get();
             return $products;
         } else {
-            $products = Product::with('productImages')->where($queryItems)->get();
+            $products = Product::with('productImages', 'attributes')->where($queryItems)->get();
             return $products;
         }
     }
@@ -64,13 +66,17 @@ class ProductService {
                 ]);
             }
         }
-        //PAROU BEM AQUI JOÃO PEDRO
-        if($request->variants){
-            foreach($request->variants as $key => $variant){
-                $product->productVariant()->create([
+        
+        if($request->atributos){
+            
+            foreach($request->atributos as $key => $atributo){
+                //dd($request->atributoValor[$key]);
+                $product->attributes()->create([
                     'product_id' => $product->id,
-                    'color_id' => $variant,
-                    'quantidade' => $request->variantQuantity[$key] ?? 0
+                    'attribute_id' => $atributo,
+                    'attribute_value_id' => $request->atributo_value_id[$key],
+                    'valor' => $request->atributoValor[$key],
+                    'quantidade' => $request->atributoQuantidade[$key] ?? 0
                 ]);
             }
                 
@@ -81,7 +87,7 @@ class ProductService {
 
     public function getById($id)
     {
-        return Product::find($id);
+        return Product::with('productImages', 'attributes')->find($id);
     }
 
     public function update($request, $id)
