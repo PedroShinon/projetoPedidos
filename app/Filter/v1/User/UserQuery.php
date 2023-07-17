@@ -19,12 +19,14 @@ class UserQuery extends Filter {
         'cidade' => ['eq', 'ne', 'lk'],
         'uf' => ['eq', 'ne', 'lk'],
         'permissao' => ['eq', 'ne'],
+        'tipo_usuario' => ['eq', 'ne'],
         'fiado' => ['eq', 'ne'],
     ];
     
     protected $columnMap = [
         'nomeLoja' => 'nome_loja',
-        'cnpjCpf' => 'cnpj_cpf'
+        'cnpjCpf' => 'cnpj_cpf',
+        'tipoUsuario' => 'tipo_usuario'
     ];
 
     protected  $operatorMap = [
