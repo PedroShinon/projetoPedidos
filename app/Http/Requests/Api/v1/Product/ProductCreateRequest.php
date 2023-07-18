@@ -24,7 +24,7 @@ class ProductCreateRequest extends FormRequest
         
         return [
             'category_id' => ['required'],
-            'variants' => ['nullable'],
+            'atributos' => ['nullable'],
             'nome' => ['required', 'max:255'],
             'marca' => ['required', 'max:255'],
             'modelo' => ['required', 'max:255'],
@@ -33,7 +33,7 @@ class ProductCreateRequest extends FormRequest
             'preco_atual' => ['required', 'decimal:2'],
             'destaque' => ['nullable'],
             'status' => ['nullable'],
-            'image' =>['nullable']
+            'image.*' =>['nullable', 'image', 'mimes:jpeg,png,jpg,svg,gif', 'max:5120']
         ];
     }
 }
