@@ -22,7 +22,7 @@ class ProductService {
         $queryItems = $filter->transform($request); //[['column', 'operator', 'value']]
 
         if (count($queryItems) == 0) {
-            $products = Product::with('productImages')->get();
+            $products = Product::with('productImages', 'attributes')->get();
             return $products;
         } else {
             $products = Product::with('productImages', 'attributes')->where($queryItems)->get();
@@ -76,6 +76,7 @@ class ProductService {
                     'attribute_id' => $atributo,
                     'attribute_value_id' => $request->atributo_value_id[$key],
                     'valor' => $request->atributoValor[$key],
+                    'nome' => $request->atributoNome[$key],
                     'quantidade' => $request->atributoQuantidade[$key] ?? 0
                 ]);
             }
@@ -120,15 +121,19 @@ class ProductService {
             }
         }
 
-        if($request->variants){
-            foreach($request->variants as $key => $variant){
-                $product->productVariant()->create([
+        if($request->atributos){
+            
+            foreach($request->atributos as $key => $atributo){
+                //dd($request->atributoValor[$key]);
+                $product->attributes()->create([
                     'product_id' => $product->id,
-                    'color_id' => $variant,
-                    'quantidade' => $request->variantQuantity[$key] ?? 0
+                    'attribute_id' => $atributo,
+                    'attribute_value_id' => $request->atributo_value_id[$key],
+                    'valor' => $request->atributoValor[$key],
+                    'nome' => $request->atributoNome[$key],
+                    'quantidade' => $request->atributoQuantidade[$key] ?? 0
                 ]);
-            }
-                
+            }  
         }
 
         return $product;

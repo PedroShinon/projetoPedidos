@@ -27,6 +27,8 @@ class AuthService {
             'permissao' => $typeUser == 'admin' ? true : false,
             'fiado' => false
         ]);
+
+        //AREA QUE MANDA EMAIL INFORMANDO QUE FOI CRIADO
            
         return ['message' => 'Usuario criado',
                 'status' => 201,
@@ -85,6 +87,8 @@ class AuthService {
                     $user->update([
                         'permissao' => 1
                     ]);
+                    // AREA QUE ENVIA EMAIL INFORMANDO DA TROCA DE PERMISSAO 
+
                 } else {
                     $user->update([
                         'permissao' => 0

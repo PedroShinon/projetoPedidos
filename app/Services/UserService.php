@@ -73,5 +73,6 @@ class UserService {
     {
         $user = User::findOrFail($id);
         $user->delete();
+        // ENVIAR EMAIL INFORMANDO DO DELETE DA CONTA
     }
 }
