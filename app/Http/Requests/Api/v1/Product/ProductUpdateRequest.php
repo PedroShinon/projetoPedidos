@@ -32,7 +32,7 @@ class ProductUpdateRequest extends FormRequest
             'preco_atual' => ['sometimes', 'numeric'],
             'destaque' => ['nullable'],
             'status' => ['nullable'],
-            'image' =>['nullable']
+            'image.*' =>['nullable', 'image', 'mimes:jpeg,png,jpg,svg,gif', 'max:5120']
         ];
     }
 }
