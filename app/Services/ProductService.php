@@ -32,18 +32,12 @@ class ProductService {
 
     public function create($request)
     {
-        
-        $category = Category::find($request->category_id);
-        if (!$category) {
-            return false;
-        }
-        $product = $category->products()->create([
-            'category_id' => $request->category_id,
+        $product = Product::create([
+            'categoria' => $request->categoria,
             'user_id' => $request->user()->id,
             'nome' => $request->nome,
             'marca' => $request->marca,
             'modelo' => $request->modelo,
-            'descricao' => $request->descricao,
             'preco_original' => $request->preco_original,
             'preco_atual' => $request->preco_atual,
             'destaque' => $request->destaque ?? false,
@@ -75,7 +69,7 @@ class ProductService {
                     'product_id' => $product->id,
                     'attribute_id' => $atributo,
                     'attribute_value_id' => $request->atributo_value_id[$key],
-                    'valor' => $request->atributoValor[$key],
+                    //'valor' => $request->atributoValor[$key],
                     'nome' => $request->atributoNome[$key],
                     'quantidade' => $request->atributoQuantidade[$key] ?? 0
                 ]);
@@ -97,9 +91,9 @@ class ProductService {
       if($product){
         $product->update([
             'nome' => $request->nome ?? $product->nome,
+            'categoria' => $request->categoria ?? $product->categoria,
             'marca' => $request->marca ?? $product->marca,
             'modelo' => $request->modelo ?? $product->modelo,
-            'descricao' => $request->descricao ?? $product->descricao,
             'preco_original' => $request->preco_original ?? $product->preco_original,
             'preco_atual' => $request->preco_atual ?? $product->preco_atual,
             'destaque' => $request->destaque ?? $product->destaque,
@@ -129,7 +123,7 @@ class ProductService {
                     'product_id' => $product->id,
                     'attribute_id' => $atributo,
                     'attribute_value_id' => $request->atributo_value_id[$key],
-                    'valor' => $request->atributoValor[$key],
+                    //'valor' => $request->atributoValor[$key],
                     'nome' => $request->atributoNome[$key],
                     'quantidade' => $request->atributoQuantidade[$key] ?? 0
                 ]);

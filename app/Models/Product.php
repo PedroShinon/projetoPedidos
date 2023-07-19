@@ -11,9 +11,9 @@ class Product extends Model
 
     protected $fillable = [
         'nome',
+        'categoria',
         'marca',
         'modelo',
-        'descricao',
         'preco_original',
         'preco_atual',
         'destaque',
@@ -25,11 +25,6 @@ class Product extends Model
         'destaque' => 'boolean',
         'status' => 'boolean'
     ];
-
-    public function products()
-    {
-        return $this->belongsTo(Category::class, 'category_id', 'id');
-    }
 
     public function productsCreator()
     {

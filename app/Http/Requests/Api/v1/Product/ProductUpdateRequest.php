@@ -23,11 +23,10 @@ class ProductUpdateRequest extends FormRequest
     {
         //$this->preco_atual = str_replace('.', ',', $this->preco_atual);
         return [
-            'category_id' => ['required'],
+            'categoria' => ['sometimes'],
             'nome' => ['sometimes', 'max:255'],
             'marca' => ['sometimes', 'max:255'],
             'modelo' => ['sometimes', 'max:255'],
-            'descricao' => ['sometimes', 'max:255'],
             'preco_original' => ['sometimes', 'numeric'],
             'preco_atual' => ['sometimes', 'numeric'],
             'destaque' => ['nullable'],

@@ -518,6 +518,221 @@ Ato GET ONE USER (ATUALIZAR) USUÁRIO:
     "message": "Permissão alterada",
     "status": 202,
     "permissao": "true"
+    }
+
+
+
+
+
+    ############################### PRODUTO ############################################
+    Ato ADICIONAR PRODUTO NO SISTEMA:
+	VERBOSE: POST
+	URL: http://127.0.0.1:8000/api/v1/products
+	Headers: necessário envio de header de autorização token Bearer,
+             necessário envio de header Form-data Multi-part.
+            
+    EXEMPLO DE ENVIO DE DADOS ACEITOS PARA CADASTRO:
+    categoria:                          Frontal
+    nome:                               Frontal Samsung J400 LCD
+    marca:                              Samsung
+    modelo:                             J400
+    preco_original:                     40.80
+    preco_atual:                        30.99
+    image[]:                            [imagem é colocada em file Input,  e pode ser array]
+    atributos[:indice]:                 1
+    atributoQuantidade[:indice]:        20
+    atributo_value_id[:indice]:         2
+    atributoNome[:indice]:              azul
+
+
+    EM CASO DE ENVIO ERRÔNEO DE DADOS RETORNA:
+    {
+        "message": "O campo categoria é obrigatório. (and 4 more errors)",
+        "errors": {
+            "categoria": [
+                "O campo categoria é obrigatório."
+            ],
+            "nome": [
+                "O campo nome é obrigatório."
+            ],
+            "marca": [
+                "O campo marca é obrigatório."
+            ],
+            "modelo": [
+                "O campo modelo é obrigatório."
+            ],
+            "preco_atual": [
+                "O campo preco atual é obrigatório."
+            ]
+        }
+    }
+
+    EM CASO DE USUARIO NÃO AUTORIZADO A REALIZAR A AÇÃO:
+    {
+        "message": "Unauthenticated."
+    }
+
+    EM CASO DE TOKEN AUTORIZADO E DADOS CORRETOS ENVIADOS RETORNA:
+    {
+    "data": {
+        "id": 4,
+        "categoria": "Telas",
+        "marca": "Samsung",
+        "nome": "Frontal Samsung J400 LCD",
+        "modelo": "V9-ab00T",
+        "preco_original": null,
+        "preco_atual": "340.99",
+        "destaque": false,
+        "status": false,
+        "created_at": "2023-07-19T13:04:25.000000Z",
+        "updated_at": "2023-07-19T13:04:25.000000Z"
+        }
+    }
+
+
+
+
+
+
+
+
+
+    ####################### GET ALL ##########################
+    Ato RECUPERAR PRODUTOS NO SISTEMA:
+	VERBOSE: GET
+	URL: http://127.0.0.1:8000/api/v1/products
+
+    RETORNO CORRETO COM ATRIBUTOS E IMAGENS EM RELACIONAMENTO:
+    {
+    "data": [
+        {
+            "id": 4,
+            "categoria": "Telas",
+            "marca": "Samsung",
+            "nome": "Frontal Samsung J400 LCD",
+            "modelo": "V9-ab00T",
+            "preco_original": null,
+            "preco_atual": "340.99",
+            "destaque": false,
+            "status": false,
+            "images": [
+                {
+                    "id": 4,
+                    "product_id": 4,
+                    "image": "storage/products/16897718651.jpg",
+                    "created_at": "2023-07-19T13:04:25.000000Z",
+                    "updated_at": "2023-07-19T13:04:25.000000Z"
+                }
+            ],
+            "atributos": [
+                {
+                    "id": 1,
+                    "product_id": 4,
+                    "attribute_id": 1,
+                    "attribute_value_id": 2,
+                    "quantidade": 20,
+                    "nome": "Azul",
+                    "created_at": "2023-07-19T13:04:25.000000Z",
+                    "updated_at": "2023-07-19T13:04:25.000000Z"
+                }
+            ],
+            "created_at": "2023-07-19T13:04:25.000000Z",
+            "updated_at": "2023-07-19T13:04:25.000000Z"
+        }
+    ]
+
+
+    ################## GET ###########################
+    Ato RECUPERAR PRODUTO INDIVIDUAL NO SISTEMA:
+	VERBOSE: GET
+	URL: http://127.0.0.1:8000/api/v1/products/1
+
+
+    {
+    "data": {
+        "id": 4,
+        "categoria": "Telas",
+        "marca": "Samsung",
+        "nome": "Frontal Samsung J400 LCD",
+        "modelo": "V9-ab00T",
+        "preco_original": null,
+        "preco_atual": "340.99",
+        "destaque": false,
+        "status": false,
+        "images": [
+            {
+                "id": 4,
+                "product_id": 4,
+                "image": "storage/products/16897718651.jpg",
+                "created_at": "2023-07-19T13:04:25.000000Z",
+                "updated_at": "2023-07-19T13:04:25.000000Z"
+            }
+        ],
+        "atributos": [
+            {
+                "id": 1,
+                "product_id": 4,
+                "attribute_id": 1,
+                "attribute_value_id": 2,
+                "quantidade": 20,
+                "nome": "Azul",
+                "created_at": "2023-07-19T13:04:25.000000Z",
+                "updated_at": "2023-07-19T13:04:25.000000Z"
+            }
+        ],
+        "created_at": "2023-07-19T13:04:25.000000Z",
+        "updated_at": "2023-07-19T13:04:25.000000Z"
+        }
+    }
+
+
+
+    ################## UPDATE ###########################
+    Ato ATUALIZAR PRODUTO INDIVIDUAL NO SISTEMA:
+	VERBOSE: POST
+    !(((((((OBS!)))))))!
+    O método de requisição enviado é Post mesmo que seja apenas atualização, isso se implica apenas nos casos
+    onde o dado enviado tem Multi-part Form-Data, o multi part é utilizado apenas com envio de dados que contenham imagem 
+    ou outro tipo de arquivo que seja fora do tradicional json string.
+    !!! Para que o método POST funcione como PUT nesses casos é necessário envio do campo  (_method: PUT ).
+
+	URL: http://127.0.0.1:8000/api/v1/products/:id
+
+    RESPOSTA DO SERVIDOR EM CASO DE SUCESSO:
+
+    {
+    "data": {
+        "id": 4,
+        "categoria": "Telas",
+        "marca": "Samsung",
+        "nome": "Frontal Samsung J400 AMOLED",
+        "modelo": "V9-ab00T",
+        "preco_original": null,
+        "preco_atual": "340.99",
+        "destaque": false,
+        "status": false,
+        "created_at": "2023-07-19T13:04:25.000000Z",
+        "updated_at": "2023-07-19T13:31:15.000000Z"
+        }
+    }
+
+
+
+
+    ################## DELETE #########################
+    Ato DELETAR PRODUTO INDIVIDUAL NO SISTEMA:
+	VERBOSE: DELETE
+    URL: http://127.0.0.1:8000/api/v1/products/:id
+
+    EM CASO DE ID NÃO ENCONTRADO:
+
+    {
+        "message": "dado não foi encontrado"
+    }
+
+    EM CASO DE SUCESSO:
+
+        204 No Content.
 }
 
 

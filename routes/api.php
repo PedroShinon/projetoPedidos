@@ -5,11 +5,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\v1\Auth\AuthController;
 use App\Http\Controllers\Api\v1\User\UserController;
 use App\Http\Controllers\Api\v1\Category\CategoryController;
+use App\Http\Controllers\Api\v1\Marca\MarcaController;
 use App\Http\Controllers\Api\v1\Color\ColorController;
 use App\Http\Controllers\Api\v1\Product\ProductController;
 use App\Http\Controllers\Api\v1\ProductImage\ProductImageController;
 use App\Http\Controllers\Api\v1\Attribute\AttributeController;
 use App\Http\Controllers\Api\v1\AttributeValue\AttributeValueController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +34,7 @@ Route::prefix('v1')->group(function(){
         Route::post('/logout',[AuthController::class, 'logout']);
         
         Route::apiResource('/users', UserController::class);
+        Route::apiResource('/marcas', MarcaController::class);
         Route::apiResource('/categorys', CategoryController::class);
         Route::apiResource('/colors', ColorController::class);
         Route::apiResource('/products', ProductController::class);

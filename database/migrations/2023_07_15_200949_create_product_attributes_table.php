@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('attribute_value_id')->constrained('attribute_values')->onDelete('cascade');
             $table->integer('quantidade');
             $table->string('nome');
-            $table->decimal('valor', 12, 2)->nullable();
+            //$table->decimal('valor', 12, 2)->nullable();
             $table->timestamps();
         });
     }

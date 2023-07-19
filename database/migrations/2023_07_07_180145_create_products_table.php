@@ -13,18 +13,16 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('user_id');
+            $table->string('categoria');
             $table->string('nome');
-            $table->string('marca');
             $table->string('modelo');
-            $table->longText('descricao')->nullable()->default(null);
+            $table->string('marca');
             $table->decimal('preco_original', 12, 2)->nullable()->default(null);
             $table->decimal('preco_atual', 12, 2);
             $table->boolean('destaque')->default(false)->comment('1 = destaque, 0 = sem_destaque');
             $table->boolean('status')->default(false)->comment('1 = invisivel, 0 = visivel');
 
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
