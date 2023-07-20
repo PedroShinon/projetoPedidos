@@ -34,7 +34,7 @@ class ProductService {
     {
         $product = Product::create([
             'categoria' => $request->categoria,
-            'user_id' => $request->user()->id,
+            'user_id' => $request->user_id,
             'nome' => $request->nome,
             'marca' => $request->marca,
             'modelo' => $request->modelo,

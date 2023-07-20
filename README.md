@@ -544,6 +544,8 @@ Ato GET ONE USER (ATUALIZAR) USUÁRIO:
     atributo_value_id[:indice]:         2
     atributoNome[:indice]:              azul
 
+    OBS: pode ser enviados quantos arrays de atributos quiser, desde que o indice esteja correto em agrupamento.
+
 
     EM CASO DE ENVIO ERRÔNEO DE DADOS RETORNA:
     {
@@ -577,6 +579,7 @@ Ato GET ONE USER (ATUALIZAR) USUÁRIO:
     "data": {
         "id": 4,
         "categoria": "Telas",
+        "user_id": "1",
         "marca": "Samsung",
         "nome": "Frontal Samsung J400 LCD",
         "modelo": "V9-ab00T",
@@ -608,6 +611,7 @@ Ato GET ONE USER (ATUALIZAR) USUÁRIO:
         {
             "id": 4,
             "categoria": "Telas",
+            "user_id": "1",
             "marca": "Samsung",
             "nome": "Frontal Samsung J400 LCD",
             "modelo": "V9-ab00T",
@@ -652,6 +656,7 @@ Ato GET ONE USER (ATUALIZAR) USUÁRIO:
     "data": {
         "id": 4,
         "categoria": "Telas",
+        "user_id": "1",
         "marca": "Samsung",
         "nome": "Frontal Samsung J400 LCD",
         "modelo": "V9-ab00T",
@@ -723,6 +728,8 @@ Ato GET ONE USER (ATUALIZAR) USUÁRIO:
     Ato DELETAR PRODUTO INDIVIDUAL NO SISTEMA:
 	VERBOSE: DELETE
     URL: http://127.0.0.1:8000/api/v1/products/:id
+
+    OBS: ao deletar produto, imagens adicionadas a ele serão deletadas automaticamente.
 
     EM CASO DE ID NÃO ENCONTRADO:
 
