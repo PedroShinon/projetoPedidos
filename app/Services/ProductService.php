@@ -51,7 +51,14 @@ class ProductService {
                 //$imageFile = $request->file('image');
                 $extension = $imageFile->getClientOriginalExtension();
                 $filename = time().$i++.'.'.$extension;
+                
+                //verificar se existe directory
+                if (!File::isDirectory($uploadPath)) {
+                    File::makeDirectory($uploadPath, 0777, true, true);
+                }
+                //stocar file
                 $imageFile->move($uploadPath, $filename);
+
                 $finalImagePathName = $uploadPath.$filename;
 
                 $product->productImages()->create([
