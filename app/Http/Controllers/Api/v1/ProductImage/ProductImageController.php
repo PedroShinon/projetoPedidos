@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Api\v1\ProductImage;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\ProductImageService;
+use App\Http\Resources\Api\v1\ProductImage\ProductImageResource;
+use App\Http\Requests\Api\v1\ProductImage\ProductImageCreateRequest;
+use App\Http\Requests\Api\v1\ProductImage\ProductImageUpdateRequest;
 
 class ProductImageController extends Controller
 {
@@ -18,17 +21,22 @@ class ProductImageController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $productImage = $this->productImageService->getAll($request);
+        return ProductImageResource::make(['message' => 'Imagens de produtos coletadas','data' => $productImage])->response()->setStatusCode(200);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProductImageCreateRequest $request)
     {
-        //
+        if(!$productImage = $this->productImageService->create($request))
+        {
+            return ProductImageResource::make(['message' => 'não foi possivel criar imagem do produto'])->response()->setStatusCode(403);
+        }
+        return ProductImageResource::make(['message' => 'imagem do produto criada', 'data' => $productImage])->response()->setStatusCode(201);
     }
 
     /**
@@ -36,16 +44,19 @@ class ProductImageController extends Controller
      */
     public function show(string $id)
     {
-        //
+        if(!$productImage = $this->productImageService->getById($id)){
+            return response()->json(['message' => 'Nenhum dado encontrado'], 404);  
+         }
+         return ProductImageResource::make(['message' => 'Imagem de produto coletado','data' => $productImage])->response()->setStatusCode(200); 
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
+    //public function update(Request $request, string $id)
+    //{
         //
-    }
+    //}
 
     /**
      * Remove the specified resource from storage.

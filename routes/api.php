@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\v1\Product\ProductController;
 use App\Http\Controllers\Api\v1\ProductImage\ProductImageController;
 use App\Http\Controllers\Api\v1\Attribute\AttributeController;
 use App\Http\Controllers\Api\v1\AttributeValue\AttributeValueController;
+use App\Http\Controllers\Api\v1\ProductAttribute\ProductAttributeController;
 
 
 /*
@@ -41,6 +42,7 @@ Route::prefix('v1')->group(function(){
         Route::apiResource('/productsImages', ProductImageController::class);
         Route::apiResource('/attributes', AttributeController::class);
         Route::apiResource('/attributeValues', AttributeValueController::class);
+        Route::apiResource('/productAttributes', ProductAttributeController::class);
 
         //super-admin(super_privilege)Provider
         Route::middleware(['can:assist_privilege'])->group(function(){

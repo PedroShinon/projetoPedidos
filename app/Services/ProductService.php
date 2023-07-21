@@ -68,16 +68,16 @@ class ProductService {
             }
         }
         
-        if($request->atributos){
+        if($request->atributoNome && $request->atributoQuantidade){
             
-            foreach($request->atributos as $key => $atributo){
+            foreach($request->atributoNome as $key => $atributo){
                 //dd($request->atributoValor[$key]);
                 $product->attributes()->create([
                     'product_id' => $product->id,
-                    'attribute_id' => $atributo,
-                    'attribute_value_id' => $request->atributo_value_id[$key],
+                    //'attribute_id' => $atributo,
+                    //'attribute_value_id' => $request->atributo_value_id[$key],
                     //'valor' => $request->atributoValor[$key],
-                    'nome' => $request->atributoNome[$key],
+                    'nome' => $request->atributoNome[$key] ?? "cor preta",
                     'quantidade' => $request->atributoQuantidade[$key] ?? 0
                 ]);
             }
@@ -122,14 +122,14 @@ class ProductService {
             }
         }
 
-        if($request->atributos){
+        if($request->atributoNome && $request->atributoQuantidade){
             
             foreach($request->atributos as $key => $atributo){
                 //dd($request->atributoValor[$key]);
                 $product->attributes()->create([
                     'product_id' => $product->id,
-                    'attribute_id' => $atributo,
-                    'attribute_value_id' => $request->atributo_value_id[$key],
+                    //'attribute_id' => $atributo,
+                    //'attribute_value_id' => $request->atributo_value_id[$key],
                     //'valor' => $request->atributoValor[$key],
                     'nome' => $request->atributoNome[$key],
                     'quantidade' => $request->atributoQuantidade[$key] ?? 0
