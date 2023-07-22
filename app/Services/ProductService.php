@@ -84,7 +84,7 @@ class ProductService {
                 
         }
 
-        return $product;
+        return $producter = Product::with('productImages', 'attributes')->where('id', $product->id)->first();
     }
 
     public function getById($id)

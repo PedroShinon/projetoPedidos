@@ -25,8 +25,8 @@ class ProductCreateRequest extends FormRequest
         return [
             'categoria' => ['required', 'max:255'],
             'user_id' => ['required', 'integer'],
-            'atributoQuantidade' => ['nullable'],
-            'atributoNome' => ['nullable'],
+            'atributoQuantidade' => ['required'],
+            'atributoNome' => ['required'],
             'nome' => ['required', 'max:255'],
             'marca' => ['required', 'max:255'],
             'modelo' => ['required', 'max:255'],
