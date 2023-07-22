@@ -21,12 +21,12 @@ class ProductCreateRequest extends FormRequest
      */
     public function rules(): array
     {
-        
+        //dd($this->request);
+        //dd($ex);
         return [
             'categoria' => ['required', 'max:255'],
             'user_id' => ['required', 'integer'],
-            'atributoQuantidade' => ['required'],
-            'atributoNome' => ['required'],
+            'atributos' => ['required'],
             'nome' => ['required', 'max:255'],
             'marca' => ['required', 'max:255'],
             'modelo' => ['required', 'max:255'],

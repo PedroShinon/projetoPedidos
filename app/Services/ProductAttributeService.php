@@ -32,21 +32,21 @@ class ProductAttributeService {
     public function create($request)
     {
         $product = Product::find($request->id);
-        if($request->nome && $request->quantidade){
-            $i = 0;
-            foreach($request->nome as $key => $atributo){
-                //dd($request->atributoValor[$key]);
+        if($request->atributos){
+            $request->atributos = json_decode($request->atributos);
+            foreach($request->atributos as $atributo){
+               
                 $product->attributes()->create([
                     'product_id' => $product->id,
                     //'attribute_id' => $atributo,
                     //'attribute_value_id' => $request->atributo_value_id[$key],
                     //'valor' => $request->atributoValor[$key],
-                    'nome' => $request->nome[$key] ?? "preto",
-                    'quantidade' => $request->quantidade[$key] ?? 0
+                    'nome' => $atributo->nome ?? "cor preta",
+                    'quantidade' => $atributo->quantidade ?? 0
                 ]);
-                $i++;
             }
-            return " ". $i ." atributos adicionados";
+
+            return $producter = Product::with('attributes')->where('id', $product->id)->first();
                 
         }
         return false;

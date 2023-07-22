@@ -21,9 +21,9 @@ class ProductAttributeCreateRequest extends FormRequest
      */
     public function rules(): array
     {
+        //dd($this->atributos);
         return [
-            'quantidade' => ['required'],
-            'nome' => ['required']
+            'atributos' => ['required']
         ];
     }
 }

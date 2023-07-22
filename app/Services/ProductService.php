@@ -68,17 +68,18 @@ class ProductService {
             }
         }
         
-        if($request->atributoNome && $request->atributoQuantidade){
-            
-            foreach($request->atributoNome as $key => $atributo){
-                //dd($request->atributoValor[$key]);
+        if($request->atributos){
+            $request->atributos = json_decode($request->atributos);
+            foreach($request->atributos as $atributo){
+                //dd($atributo->quantidade);
+               
                 $product->attributes()->create([
                     'product_id' => $product->id,
                     //'attribute_id' => $atributo,
                     //'attribute_value_id' => $request->atributo_value_id[$key],
                     //'valor' => $request->atributoValor[$key],
-                    'nome' => $request->atributoNome[$key] ?? "cor preta",
-                    'quantidade' => $request->atributoQuantidade[$key] ?? 0
+                    'nome' => $atributo->nome ?? "cor preta",
+                    'quantidade' => $atributo->quantidade ?? 0
                 ]);
             }
                 
