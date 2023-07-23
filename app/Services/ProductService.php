@@ -69,12 +69,14 @@ class ProductService {
         }
         
         if($request->atributos){
-            dd($request->atributos);
-            $request->atributos = json_decode($request->atributos[0]);
-            dd($request->atributos);
+            //dd($request->atributos);
+            //$request->atributos = json_decode($request->atributos);
+            //dd($request->atributos);
             
             foreach($request->atributos as $atributo){
                 //dd($atributo->quantidade);
+                //dd($atributo);
+                $atributo = json_decode($atributo);
                
                 $product->attributes()->create([
                     'product_id' => $product->id,
