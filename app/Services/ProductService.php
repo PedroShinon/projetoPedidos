@@ -71,7 +71,7 @@ class ProductService {
         if($request->atributos){
             //dd($request->atributos);
             //$request->atributos = json_decode($request->atributos);
-            dd($request->atributos);
+            //dd($request->atributos);
             foreach($request->atributos as $atributo){
                 //dd($atributo->quantidade);
                
