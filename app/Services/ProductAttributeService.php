@@ -39,16 +39,17 @@ class ProductAttributeService {
             
             foreach($request->atributos as $atributo){
                 //dd($atributo->quantidade);
+                //dd($atributo["nome"]);
+                //$atributo = json_decode($atributo);
                 //dd($atributo);
-                $atributo = json_decode($atributo);
                
                 $product->attributes()->create([
                     'product_id' => $product->id,
                     //'attribute_id' => $atributo,
                     //'attribute_value_id' => $request->atributo_value_id[$key],
                     //'valor' => $request->atributoValor[$key],
-                    'nome' => $atributo->nome ?? "cor preta",
-                    'quantidade' => $atributo->quantidade ?? 0
+                    'nome' => $atributo["nome"] ?? "cor preta",
+                    'quantidade' => $atributo["quantidade"] ?? 0
                 ]);
             }
             return $producter = Product::with('productImages', 'attributes')->where('id', $product->id)->first();
