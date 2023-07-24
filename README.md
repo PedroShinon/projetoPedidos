@@ -539,10 +539,13 @@ Ato GET ONE USER (ATUALIZAR) USUÁRIO:
     preco_original:                     40.80
     preco_atual:                        30.99
     image[]:                            [imagem é colocada em file Input,  e pode ser array]
-    atributos[:indice]:                 1
-    atributoQuantidade[:indice]:        20
-    atributo_value_id[:indice]:         2
-    atributoNome[:indice]:              azul
+    "atributos": [
+        {  
+            "quantidade":   2,
+            "nome":         "azul"
+        }
+    ]
+    
 
     OBS: pode ser enviados quantos arrays de atributos quiser, desde que o indice esteja correto em agrupamento.
 
@@ -677,8 +680,6 @@ Ato GET ONE USER (ATUALIZAR) USUÁRIO:
             {
                 "id": 1,
                 "product_id": 4,
-                "attribute_id": 1,
-                "attribute_value_id": 2,
                 "quantidade": 20,
                 "nome": "Azul",
                 "created_at": "2023-07-19T13:04:25.000000Z",
@@ -740,7 +741,298 @@ Ato GET ONE USER (ATUALIZAR) USUÁRIO:
     EM CASO DE SUCESSO:
 
         204 No Content.
+
+
+
+
+    ################### ATRIBUTO DO PRODUTO #######################
+
+    ################## CREATE ###########################
+    Ato CRIAR ATRIBUTO DO PRODUTO INDIVIDUALMENTE NO SISTEMA:
+	VERBOSE: POST    
+    URL: http://127.0.0.1:8000/api/v1/attributeValues
+
+    EXEMPLO DE ENVIO CORRETO EM JSON:
+    {
+        "id": 8,
+        "atributos": [
+            {  
+                "quantidade": 2,
+                "nome": "azul"
+            },
+            {  
+                "quantidade": 2,
+                "nome": "azul"
+            }
+        ]
+    }
+
+    "id" => campo id representa o id do produto ao qual os atributos serão cadastrados. (sem ele é executado resposta badRequest por não saber a qual produto será destinado o atributo).
+
+    EM CASO DE ERRO:
+
+    {
+        "data": {
+            "message": "não foi possivel criar atributo do produto"
+        }
+    }
+
+    EM CASO DE ACERTO E ACEITAÇÃO DOS DADOS:
+    {
+    "message": "atributo do produto criado",
+    "data": {
+        "id": 11,
+        "user_id": 1,
+        "categoria": "Telas",
+        "nome": "tester02",
+        "modelo": "V9-ab00T",
+        "marca": "Samsung",
+        "preco_original": null,
+        "preco_atual": "340.99",
+        "destaque": false,
+        "status": false,
+        "created_at": "2023-07-22T19:03:08.000000Z",
+        "updated_at": "2023-07-22T19:03:08.000000Z",
+        "product_images": [],
+        "attributes": [
+            {
+                "id": 19,
+                "product_id": 11,
+                "quantidade": 20,
+                "nome": "Verde",
+                "created_at": "2023-07-22T19:03:08.000000Z",
+                "updated_at": "2023-07-22T19:03:08.000000Z"
+            },
+            {
+                "id": 20,
+                "product_id": 11,
+                "quantidade": 40,
+                "nome": "Azul",
+                "created_at": "2023-07-22T19:03:08.000000Z",
+                "updated_at": "2023-07-22T19:03:08.000000Z"
+            },
+            {
+                "id": 63,
+                "product_id": 11,
+                "quantidade": 2,
+                "nome": "azul",
+                "created_at": "2023-07-24T19:04:47.000000Z",
+                "updated_at": "2023-07-24T19:04:47.000000Z"
+            }
+        ]
+    }
+    }
+
+
+
+    ################## UPDATE ###############################
+    Ato ATUALIZAR ATRIBUTO DO PRODUTO INDIVIDUALMENTE NO SISTEMA:
+	VERBOSE: PUT    
+    URL: http://127.0.0.1:8000/api/v1/attributeValues/:id
+
+    CASO DE DADOS CORRETOS A SEREM ENVIADOS EM JSON:
+        {  
+            "quantidade": 2,
+            "nome": "violeta"
+        }
+
+    RETORNO EM OCASIÃO CORRETA:
+    {
+    "data": {
+        "id": 63,
+        "product_id": 11,
+        "quantidade": 20,
+        "nome": "violeta",
+        "created_at": "2023-07-24T19:04:47.000000Z",
+        "updated_at": "2023-07-24T19:16:52.000000Z"
+    }
+    RETORNO EM ID DO ATRIBUTO NÃO ENCONTRADO:
+    {
+        "message": "dado não foi encontrado"
+    }
+
+
+    ################## DELETE ###############################
+    Ato DELETAR ATRIBUTO DO PRODUTO INDIVIDUALMENTE NO SISTEMA:
+	VERBOSE: DELETE    
+    URL: http://127.0.0.1:8000/api/v1/attributeValues/:id
+
+    EM CASO DE ID SOLICITADO EXISTIR:
+
+    RETORNA 204 NO CONTENT
+
+    EM CASO DE ID SOLICITADO NÃO EXISTIR:
+    {
+        "message": "dado não foi encontrado"
+    }
+
+
+    ################## GET ALL ###############################
+    Ato DELETAR ATRIBUTO DO PRODUTO INDIVIDUALMENTE NO SISTEMA:
+	VERBOSE: GET    
+    URL: http://127.0.0.1:8000/api/v1/attributeValues
+    SE NECESSÁRIO PODE SER PROVISIONADO PARAMETROS DE FILTRO AO GET APOS A '?'.
+
+
+
+
+
+
+
+
+
+
+
+    ################### IMAGEM DO PRODUTO #######################
+    
+    ################## CREATE ###########################
+    Ato CRIAR IMAGEM DO PRODUTO INDIVIDUALMENTE NO SISTEMA:
+	VERBOSE: POST    
+    URL: http://127.0.0.1:8000/api/v1/attributeValues
+
+    EXEMPLO DE ENVIO CORRETO EM JSON:
+    {
+        "id": 8,
+        "imagem[]": (array de imagens ou imagem única)
+    }
+
+    "id" => campo id representa o id do produto ao qual as imagens serão atribuídas. (sem ele é executado resposta badRequest por não saber a qual produto será destinado a imagem).
+
+    EM CASO DE ERRO:
+
+    {
+        "data": {
+            "message": "não foi possivel criar imagem do produto"
+        }
+    }
+
+    EM CASO DE ACERTO E ACEITAÇÃO DOS DADOS:
+    {
+{
+    "message": "imagem do produto criada",
+    "data": {
+        "id": 7,
+        "user_id": 1,
+        "categoria": "Telas",
+        "nome": "Frontal Samsung J400 LCD",
+        "modelo": "V9-ab00T",
+        "marca": "Samsung",
+        "preco_original": null,
+        "preco_atual": "340.99",
+        "destaque": false,
+        "status": false,
+        "created_at": "2023-07-21T18:06:54.000000Z",
+        "updated_at": "2023-07-21T18:06:54.000000Z",
+        "product_images": [
+            {
+                "id": 10,
+                "product_id": 7,
+                "image": "storage/products/16899664211.jpg",
+                "created_at": "2023-07-21T19:07:01.000000Z",
+                "updated_at": "2023-07-21T19:07:01.000000Z"
+            },
+            {
+                "id": 11,
+                "product_id": 7,
+                "image": "storage/products/16899666980.jpg",
+                "created_at": "2023-07-21T19:11:38.000000Z",
+                "updated_at": "2023-07-21T19:11:38.000000Z"
+            },
+            {
+                "id": 12,
+                "product_id": 7,
+                "image": "storage/products/16899666981.jpg",
+                "created_at": "2023-07-21T19:11:38.000000Z",
+                "updated_at": "2023-07-21T19:11:38.000000Z"
+            },
+            {
+                "id": 13,
+                "product_id": 7,
+                "image": "storage/products/16899666982.jpg",
+                "created_at": "2023-07-21T19:11:38.000000Z",
+                "updated_at": "2023-07-21T19:11:38.000000Z"
+            },
+            {
+                "id": 14,
+                "product_id": 7,
+                "image": "storage/products/16899667240.jpg",
+                "created_at": "2023-07-21T19:12:04.000000Z",
+                "updated_at": "2023-07-21T19:12:04.000000Z"
+            },
+            {
+                "id": 18,
+                "product_id": 7,
+                "image": "storage/products/16902271730.jpg",
+                "created_at": "2023-07-24T19:32:53.000000Z",
+                "updated_at": "2023-07-24T19:32:53.000000Z"
+            },
+            {
+                "id": 19,
+                "product_id": 7,
+                "image": "storage/products/16902272680.jpg",
+                "created_at": "2023-07-24T19:34:28.000000Z",
+                "updated_at": "2023-07-24T19:34:28.000000Z"
+            }
+        ]
+    }
 }
+    }
+
+
+
+    ################## UPDATE ################################
+    Ato ATUALIZAR IMAGEM DO PRODUTO INDIVIDUALMENTE NO SISTEMA:
+	VERBOSE: PUT    
+    URL: http://127.0.0.1:8000/api/v1/productsImages/:id
+
+    CASO DE DADOS CORRETOS A SEREM ENVIADOS EM JSON:
+        {  
+            "quantidade": 2,
+            "nome": "violeta"
+        }
+
+    RETORNO EM OCASIÃO CORRETA:
+    {
+    "data": {
+        "id": 63,
+        "product_id": 11,
+        "quantidade": 20,
+        "nome": "violeta",
+        "created_at": "2023-07-24T19:04:47.000000Z",
+        "updated_at": "2023-07-24T19:16:52.000000Z"
+    }
+    RETORNO EM ID DO ATRIBUTO NÃO ENCONTRADO:
+    {
+        "message": "dado não foi encontrado"
+    }
+
+
+    ################## DELETE ###############################
+    Ato DELETAR IMAGEM DO PRODUTO INDIVIDUALMENTE NO SISTEMA:
+	VERBOSE: DELETE    
+    URL: http://127.0.0.1:8000/api/v1/productsImages/:id
+
+    EM CASO DE ID SOLICITADO EXISTIR:
+
+    RETORNA 204 NO CONTENT
+
+    EM CASO DE ID SOLICITADO NÃO EXISTIR:
+    {
+        "message": "dado não foi encontrado"
+    }
+
+    ################## GET ALL ###############################
+    Ato PEGAR TODAS AS IMAGEM DOS PRODUTOS NO SISTEMA:
+	VERBOSE: GET    
+    URL: http://127.0.0.1:8000/api/v1/productsImages
+    SE NECESSÁRIO PODE SER PROVISIONADO PARAMETROS DE FILTRO AO GET APOS A '?'.
+
+}
+}
+
+
+
+
 
 
 

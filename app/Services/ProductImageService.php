@@ -55,7 +55,7 @@ class ProductImageService {
                     'image' => $finalImagePathName,
                 ]);
             }
-            return " ". $i ." imagens adicionadas";
+            return $producter = Product::with('productImages')->where('id', $product->id)->first();
         }
         return false;
         

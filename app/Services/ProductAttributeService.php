@@ -32,16 +32,12 @@ class ProductAttributeService {
     public function create($request)
     {
         $product = Product::find($request->id);
-        if($request->atributos){
+        if($request->atributos && $product){
             //dd($request->atributos);
             //$request->atributos = json_decode($request->atributos);
             //dd($request->atributos);
             
             foreach($request->atributos as $atributo){
-                //dd($atributo->quantidade);
-                //dd($atributo["nome"]);
-                //$atributo = json_decode($atributo);
-                //dd($atributo);
                
                 $product->attributes()->create([
                     'product_id' => $product->id,

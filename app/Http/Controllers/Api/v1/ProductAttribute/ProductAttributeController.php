@@ -34,9 +34,9 @@ class ProductAttributeController extends Controller
     {
         if(!$productAttribute = $this->productAttributeService->create($request))
         {
-            return ProductAttributeResource::make(['message' => 'não foi possivel criar atributo do produto'])->response()->setStatusCode(403);
+            return ProductAttributeResource::make(['message' => 'não foi possivel criar atributo do produto'])->response()->setStatusCode(400);
         }
-        return ProductAttributeResource::make(['message' => 'atributo do produto criada', 'data' => $productAttribute])->response()->setStatusCode(201);
+        return ProductAttributeResource::make(['message' => 'atributo do produto criado', 'data' => $productAttribute])->response()->setStatusCode(201);
     }
 
     /**
