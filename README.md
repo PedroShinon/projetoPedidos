@@ -1028,6 +1028,252 @@ Ato GET ONE USER (ATUALIZAR) USUÁRIO:
     SE NECESSÁRIO PODE SER PROVISIONADO PARAMETROS DE FILTRO AO GET APOS A '?'.
 
 }
+
+
+
+
+
+
+
+
+    ################### BANNER #######################
+    
+    ################## CREATE ###########################
+    Ato CRIAR BANNER INDIVIDUALMENTE NO SISTEMA:
+	VERBOSE: POST    
+    URL: http://127.0.0.1:8000/api/v1/banners
+
+    EXEMPLO DE ENVIO CORRETO EM FORM-DATA:
+    #campo----------------------Valor# 
+
+    nome                        ExemploNome
+    image[]                     ExemploImage.jpg
+
+
+    EM CASO DE ENVIO ERRADO:
+    {
+        "message": "O campo nome é obrigatório.",
+        "errors": {
+            "nome": [
+                "O campo nome é obrigatório."
+            ]
+    }
+
+    # OU #
+    {
+        "data": {
+            "message": "não foi possivel criar o banner"
+        }
+    }
+}
+
+    ################### BANNER #######################
+    
+    ################## DELETE ###########################
+    Ato DELETAR BANNER INDIVIDUALMENTE NO SISTEMA:
+	VERBOSE: DELETE    
+    URL: http://127.0.0.1:8000/api/v1/banners/:id
+
+    EM CASO DE ACERTO E FLUCO CORRETO RETORNA:
+
+        STATUS CODE: 204
+
+    EM CASO DE ITEM NÃO ENCONTRADO (404):
+
+        {
+            "message": "dado não foi encontrado"
+        }
+
+
+    
+    ################### BANNER #######################
+    
+    ################## GET ALL ###########################
+    Ato COLETAR BANNERS NO SISTEMA:
+	VERBOSE: GET    
+    URL: http://127.0.0.1:8000/api/v1/banners
+
+    EM CASO CORRETO RETORNA:
+
+    {
+        "message": "banner coletadas",
+        "data": {
+            "id": 3,
+            "nome": "testeBanner1",
+            "image": "storage/banners/16903771340.jpg",
+            "created_at": "2023-07-26T13:12:14.000000Z",
+            "updated_at": "2023-07-26T13:12:14.000000Z"
+        }
+    }
+
+    EM CASO DE ITEM NÃO ENCONTRADO RETORNA DATA: ARRAY[] VAZIO.
+
+
+
+
+
+
+
+
+    ################### CART ###########################
+    
+    ################## CREATE ###########################
+    Ato CRIAR CART INDIVIDUALMENTE NO SISTEMA:
+	VERBOSE: POST    
+    URL: http://127.0.0.1:8000/api/v1/carts
+
+    EXEMPLO DE DADOS A SEREM ENVIADOS:
+    {
+        "product_id": 1,
+        "image": "storage/products/16905714021.jpg",
+        "attribute_id": 4,
+        "attributo": "verde",
+        "quantidade": 4
+    }
+
+    RESPOSTA EM CASO DE ACERTO (STATUS:201):
+    {
+    "message": "Carrinho criado",
+        "data": {
+            "user_id": 2,
+            "product_id": 3,
+            "image": "storage/products/16905714021.jpg",
+            "attribute_id": 5,
+            "quantidade": 4,
+            "attributo": "verde",
+            "updated_at": "2023-07-27T17:50:00.000000Z",
+            "created_at": "2023-07-27T17:50:00.000000Z",
+            "id": 5
+        }
+    }
+
+
+
+    ################## UPDATE ###########################
+    #                                                   #
+    ################## CART #############################
+    Ato ATUALIZAR CART INDIVIDUALMENTE NO SISTEMA:
+	VERBOSE: PUT    
+    URL: http://127.0.0.1:8000/api/v1/carts/1
+
+    DADO A SER ENVIADO:
+
+    {
+        "quantidade": 10
+    }
+
+    RECEBIDO EM CASO DE SUCESSO:
+    {
+    "message": "Item do carrinho atualizado",
+        "data": {
+            "id": 1,
+            "user_id": 1,
+            "product_id": 1,
+            "attribute_id": 2,
+            "image": "storage/products/16905714021.jpg",
+            "attributo": "vermelho",
+            "quantidade": 10,
+            "created_at": "2023-07-28T19:13:04.000000Z",
+            "updated_at": "2023-07-28T19:27:53.000000Z"
+        }
+    }
+
+
+
+
+
+
+
+    ################### CART ###########################
+    
+    ################## DELETE ###########################
+    Ato DELETAR CART INDIVIDUALMENTE NO SISTEMA:
+	VERBOSE: DELETE    
+    URL: http://127.0.0.1:8000/api/v1/carts/:ID
+
+    EM CASO DE ACERTO E SINTAXE VALIDA RETORNA: (STATUS 204).
+
+
+
+
+    ################### CART #######################
+    
+    ################## GET ALL ###########################
+    Ato COLETAR CARTS NO SISTEMA:
+	VERBOSE: GET    
+    URL: http://127.0.0.1:8000/api/v1/carts
+
+    EM CASO CORRETO RETORNA:
+
+    {
+        "message": "Carrinhos coletados",
+        "data": [
+            {
+                "id": 1,
+                "user_id": 1,
+                "product_id": 1,
+                "attribute_id": 1,
+                "quantidade": 9,
+                "created_at": "2023-07-26T19:52:54.000000Z",
+                "updated_at": "2023-07-26T19:52:54.000000Z"
+            },
+            {
+                "id": 3,
+                "user_id": 1,
+                "product_id": 2,
+                "attribute_id": 4,
+                "quantidade": 30,
+                "created_at": "2023-07-26T19:55:10.000000Z",
+                "updated_at": "2023-07-26T19:55:10.000000Z"
+            },
+            {
+                "id": 4,
+                "user_id": 2,
+                "product_id": 3,
+                "attribute_id": 5,
+                "quantidade": 4,
+                "created_at": "2023-07-26T20:19:09.000000Z",
+                "updated_at": "2023-07-26T20:19:09.000000Z"
+            }
+        ]
+    }
+
+    EM CASO DE ITEM NÃO ENCONTRADO RETORNA DATA: ARRAY[] VAZIO.
+
+
+
+    ################### CART ############################
+    
+    ################## GET ALL ###########################
+    Ato COLETAR CARTS APENAS DO USUÁRIO LOGADO NO SISTEMA:
+    OBS: MÉTODO SEGURO DE RECUPERAR APENAS O CARRINHO DO PRÓPRIO USUARIO LOGADO.
+	VERBOSE: GET    
+    URL: http://127.0.0.1:8000/api/v1/getCartsLinkedToUser
+
+
+    {
+    "message": "Carrinhos coletados",
+    "data": [
+        {
+            "id": 1,
+            "user_id": 1,
+            "product_id": 1,
+            "attribute_id": 1,
+            "quantidade": 9,
+            "created_at": "2023-07-26T19:52:54.000000Z",
+            "updated_at": "2023-07-26T19:52:54.000000Z"
+        },
+        {
+            "id": 3,
+            "user_id": 1,
+            "product_id": 2,
+            "attribute_id": 4,
+            "quantidade": 30,
+            "created_at": "2023-07-26T19:55:10.000000Z",
+            "updated_at": "2023-07-26T19:55:10.000000Z"
+        }
+    ]
+}
 }
 
 

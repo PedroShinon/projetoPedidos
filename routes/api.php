@@ -12,6 +12,9 @@ use App\Http\Controllers\Api\v1\ProductImage\ProductImageController;
 use App\Http\Controllers\Api\v1\Attribute\AttributeController;
 use App\Http\Controllers\Api\v1\AttributeValue\AttributeValueController;
 use App\Http\Controllers\Api\v1\ProductAttribute\ProductAttributeController;
+use App\Http\Controllers\Api\v1\Order\OrderController;
+use App\Http\Controllers\Api\v1\Banner\BannerController;
+use App\Http\Controllers\Api\v1\Cart\CartController;
 
 
 /*
@@ -43,6 +46,11 @@ Route::prefix('v1')->group(function(){
         Route::apiResource('/attributes', AttributeController::class);
         Route::apiResource('/attributeValues', AttributeValueController::class);
         Route::apiResource('/productAttributes', ProductAttributeController::class);
+        Route::apiResource('/orders', OrderController::class);
+        Route::apiResource('/banners', BannerController::class);
+        //cart
+        Route::apiResource('/carts', CartController::class);
+        Route::get('/getCartsLinkedToUser',[CartController::class, 'getCartsLinkedToUser']);
 
         //super-admin(super_privilege)Provider
         Route::middleware(['can:assist_privilege'])->group(function(){
