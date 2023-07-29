@@ -29,12 +29,16 @@ class CartService {
     {
         $filter = new CartQuery();
         $queryItems = $filter->transform($request); //[['column', 'operator', 'value']]
+        
+        $limit = $request->limit ?? null;
+        //dd($pagi);
 
         if (count($queryItems) == 0) {
-            $carts = $request->user()->cartItems()->get();
+            $carts = $request->user()->cartItems()->with('produto', 'prodAtributo')->limit($limit)->get();
+            //dd($carts);
             return $carts;
         } else {
-            $carts = $request->user()->cartItems()->get();
+            $carts = $request->user()->cartItems()->with('produto', 'prodAtributo')->get();
             return $carts;
         }
     }
