@@ -48,7 +48,8 @@ class OrderService {
     public function create($request)
     {
         //pegar produtos do carrinho
-        $produtosNoCart = $request->user()->cartItems()->get();
+        //$produtosNoCart = $request->user()->cartItems()->get();
+        $produtosNoCart = $request->productsInCart;
         //pegar produtos no estoque
         $produtoEmEstoque = ProductAttribute::whereIn('id', $produtosNoCart->pluck('attribute_id'))->get();
         //dd($produtoEmEstoque);

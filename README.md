@@ -1274,6 +1274,69 @@ Ato GET ONE USER (ATUALIZAR) USUÁRIO:
         }
     ]
 }
+
+
+
+
+
+    ############################### CATEGORIA ############################################
+    Ato ADICIONAR CATEGORIA NO SISTEMA:
+	VERBOSE: POST
+	URL: http://127.0.0.1:8000/api/v1/categorys
+	
+    DADO A SER ENVIADO: 
+    nome:             Frontal
+    descricao:         bsfsfhsfjfhsjfhn
+
+    RESPOSTA EM CASO VALIDO:
+    {
+    "message": "categoria criada",
+        "data": {
+            "nome": "Lateral",
+            "descricao": "qualquier muqueca",
+            "visivel": true,
+            "updated_at": "2023-07-31T23:13:56.000000Z",
+            "created_at": "2023-07-31T23:13:56.000000Z",
+            "id": 1
+        }
+    }
+
+
+    ############################### CATEGORIA ############################################
+    Ato DELETAR CATEGORIA NO SISTEMA:
+	VERBOSE: DELETE
+	URL: http://127.0.0.1:8000/api/v1/categorys/:ID
+
+
+
+
+
+    ############################### CATEGORIA ############################################
+    Ato ATUALIZAR CATEGORIA NO SISTEMA:
+	VERBOSE: PUT
+	URL: http://127.0.0.1:8000/api/v1/categorys/:ID
+	
+    DADO A SER ENVIADO EXEMPLO: 
+    nome:             Bateria
+    descricao:         bsfsfhsfjfhsjfhn
+
+
+
+
+
+
+
+
+
+
+
+    ################### PEDIDOS ##########################
+    
+    ################## GET ALL ###########################
+    Ato COLETAR PEDIDOS APENAS DO USUÁRIO LOGADO NO SISTEMA:
+    OBS: MÉTODO SEGURO DE RECUPERAR APENAS OS PEDIDOS DO PRÓPRIO USUARIO LOGADO.
+	VERBOSE: GET    
+    URL: http://127.0.0.1:8000/api/v1/getOrdersLinkedToUser
 }
 
 
