@@ -29,6 +29,13 @@ class OrderController extends Controller
         return OrderResource::collection($orders)->response()->setStatusCode(200);
     }
 
+    //pega ordens pertecentes ao usuário solicitante
+    public function getOrdersLinkedToUser(Request $request)
+    {
+        $orders = $this->orderService->getOrdersLinkedToUser($request);
+        return OrderResource::collection($orders)->response()->setStatusCode(200);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -36,7 +43,7 @@ class OrderController extends Controller
     {
         if(!$order = $this->orderService->create($request))
         {
-            return response()->json(['message' => 'não foi possivel criar'], 403);
+            return response()->json(['message' => 'não foi possivel criar o pedido'], 403);
         }
         return OrderResource::make($order)->response()->setStatusCode(201);
     }
@@ -59,6 +66,15 @@ class OrderController extends Controller
     {
         $request->validated();
         if($order = $this->orderService->update($request, $id)){
+            return OrderResource::make($order)->response()->setStatusCode(202); 
+        }
+        return response()->json(['message' => 'dado não foi encontrado'], 404); 
+    }
+
+    public function StatusUpdateByUser(string $id)
+    {
+        $request->validated();
+        if($order = $this->orderService->StatusUpdateByUser($id)){
             return OrderResource::make($order)->response()->setStatusCode(202); 
         }
         return response()->json(['message' => 'dado não foi encontrado'], 404); 

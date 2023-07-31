@@ -46,11 +46,19 @@ Route::prefix('v1')->group(function(){
         Route::apiResource('/attributes', AttributeController::class);
         Route::apiResource('/attributeValues', AttributeValueController::class);
         Route::apiResource('/productAttributes', ProductAttributeController::class);
-        Route::apiResource('/orders', OrderController::class);
         Route::apiResource('/banners', BannerController::class);
+
         //cart
         Route::apiResource('/carts', CartController::class);
         Route::get('/getCartsLinkedToUser',[CartController::class, 'getCartsLinkedToUser']);
+
+        //order
+        Route::apiResource('/orders', OrderController::class);
+        Route::get('/getOrdersLinkedToUser',[OrderController::class, 'getOrdersLinkedToUser']);
+        Route::put('/StatusUpdateByUser',[OrderController::class, 'StatusUpdateByUser']);
+
+        
+
 
         //super-admin(super_privilege)Provider
         Route::middleware(['can:assist_privilege'])->group(function(){

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
             $table->integer('product_id');
             $table->integer('attribute_id');
+            $table->string('nome');
             $table->integer('quantidade');
             $table->decimal('preco', 12, 2);
 

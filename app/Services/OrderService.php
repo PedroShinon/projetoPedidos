@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Models\Order;
+use App\Models\Product;
+use App\Models\ProductAttribute;
 use App\Models\OrderItem;
 use Illuminate\Support\Facades\Hash;
 use App\Filter\v1\Order\OrderQuery;
@@ -18,47 +20,104 @@ class OrderService {
         $queryItems = $filter->transform($request); //[['column', 'operator', 'value']]
 
         if (count($queryItems) == 0) {
-            $ordem = Order::all();
+            $ordem = Order::with('items')->get();
             return $ordem;
         } else {
-            $ordem = Order::where($queryItems)->get();
+            $ordem = Order::with('items')->where($queryItems)->get();
             return $ordem;
+        }
+    }
+
+    public function getOrdersLinkedToUser($request)
+    {
+        $filter = new OrderQuery();
+        $queryItems = $filter->transform($request); //[['column', 'operator', 'value']]
+        
+        $limit = $request->limit ?? null;
+        //dd($pagi);
+
+        if (count($queryItems) == 0) {
+            $orders = $request->user()->orders()->with('items')->limit($limit)->get();
+            return $orders;
+        } else {
+            $orders = $request->user()->orders()->with('items')->where($queryItems)->get();
+            return $orders;
         }
     }
 
     public function create($request)
     {
-        $endereco = ' Cidade: ' . $request->user()->cidade . ' Bairro: ' .$request->user()->bairro . ' Logradouro: ' .
-            $request->user()->logradouro . ' número: ' . $request->user()->numero . ' Estado: ' . $request->user()->uf;
-
-        $ordem = new Order;
-        $ordem->user_id = $request->user()->id;
-        $ordem->loja_id = $request->loja_id;
-        $ordem->tracking_code = Str::random(5) . 'tm:' . time() . 'LID:' . $request->loja_id;
-        $ordem->nome_completo = $request->user()->nome;
-        $ordem->endereco = $endereco;
-        $ordem->email = $request->user()->email;
-        $ordem->numero_tel = $request->user()->telefone;
-        $ordem->pincode = random_int(1000, 9999);
-        $ordem->quantidade = count($request->produtos);
-        $ordem->status_pedidos = "Em verificação";
-        $ordem->preco_total = 00.00;
-        $ordem->save();
-
-        if ($ordem) {
-            foreach ($request->produtos as $produto) {
+        //pegar produtos do carrinho
+        $produtosNoCart = $request->user()->cartItems()->get();
+        //pegar produtos no estoque
+        $produtoEmEstoque = ProductAttribute::whereIn('id', $produtosNoCart->pluck('attribute_id'))->get();
+        //dd($produtoEmEstoque);
+            
+        //checar se quantidades em estoque são maiores que a da compra.
+        if($produtosNoCart){
+            foreach ($produtosNoCart as $produto) {
 
                 //dd($produto);
 
-                $this->precototal += $produto['preco'];
+                //dd($produtoEmEstoque);
 
-                $OrderItems = OrderItem::create([
-                'order_id' => $ordem->id,
-                'product_id' => $produto['product_id'],
-                'attribute_id' => $produto['attribute_id'],
-                'quantidade' => $produto['quantidade'],
-                'preco' => $produto['preco']
-                ]);
+                $produtoEmEstoque = ProductAttribute::where('id', $produto['attribute_id'])->first();
+
+                if($produtoEmEstoque['quantidade'] < $produto['quantidade']){
+                    return false;
+                }
+            }
+        } else {
+            return false;
+        }
+
+
+        $endereco = ' Cidade: ' . $request->user()->cidade . ', Bairro: ' .$request->user()->bairro . ', Logradouro: ' .
+            $request->user()->logradouro . ', número: ' . $request->user()->numero . ', Estado: ' . $request->user()->uf;
+
+        if($request->user()->cartItems()->count() > 0){
+            $ordem = new Order;
+            $ordem->user_id = $request->user()->id;
+            $ordem->loja_id = $request->loja_id;
+            $ordem->tracking_code = Str::random(6) . 'tm:' . time() . 'LID:' . $request->loja_id;
+            $ordem->nome_completo = $request->user()->nome;
+            $ordem->endereco = $endereco;
+            $ordem->email = $request->user()->email;
+            $ordem->numero_tel = $request->user()->telefone;
+            $ordem->pincode = random_int(1000, 9999);
+            $ordem->quantidade = $request->user()->cartItems()->count();
+            $ordem->status_pedidos = "Em verificação";
+            $ordem->preco_total = 00.00;
+            $ordem->save();
+        } else {
+            return false;
+        }
+       
+        if ($ordem) {
+
+            //criacao
+            foreach ($produtosNoCart as $produto) {
+                //dd($produto);
+
+                if($prodAtual = Product::where('id', $produto['product_id'])->first()){
+
+                    $prodAtual->attributes()->where('id', $produto['attribute_id'])->decrement('quantidade', $produto['quantidade']);
+
+                    $this->precototal += $prodAtual['preco_atual'] * $produto['quantidade'];
+
+                    $OrderItems = OrderItem::create([
+                    'order_id' => $ordem->id,
+                    'product_id' => $produto['product_id'],
+                    'attribute_id' => $produto['attribute_id'],
+                    'quantidade' => $produto['quantidade'],
+                    'nome' => $prodAtual['nome'] .' '. $produto['attributoName'],
+                    'preco' => $prodAtual['preco_atual'] * $produto['quantidade']
+                    ]);
+
+                } else {
+                    $ordem->delete();
+                    return 'produto não está mais disponível ou não pôde ser encontrado';
+                }
             }
 
             $ordem->update([
@@ -69,6 +128,7 @@ class OrderService {
             return false;
         }
 
+        //$request->user()->cartItems()->delete();
         return $ordem;
 
     }
@@ -94,6 +154,22 @@ class OrderService {
       }
       return false;
     }
+
+
+    public function StatusUpdateByUser($id)
+    {
+
+      $ordem = Order::find($id);
+      if($ordem){
+
+        $ordem->status_pedidos = "Recebido";
+        $ordem->save();
+        return $ordem;
+      }
+      return false;
+    }
+
+    
 
     public function delete($id): void
     {

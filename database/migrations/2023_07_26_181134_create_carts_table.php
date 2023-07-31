@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('product_id');
             $table->integer('attribute_id');
             $table->string('image')->nullable();
-            $table->string('attributo');
+            $table->string('attributoName');
             $table->integer('quantidade');
            // $table->decimal('preco', 12, 2);
 

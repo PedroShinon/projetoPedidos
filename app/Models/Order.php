@@ -11,7 +11,6 @@ class Order extends Model
 
     protected $fillable = [
         'user_id',
-        'loja_id',
         'tracking_code',
         'nome_completo',
         'endereco',
@@ -26,5 +25,10 @@ class Order extends Model
     public function items()
     {
         return $this->hasMany(OrderItem::class, 'order_id', 'id');
+    }
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }

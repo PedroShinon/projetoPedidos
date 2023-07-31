@@ -24,7 +24,7 @@ class CartCreateRequest extends FormRequest
         //dd($this->request);
         return [
             'product_id' => ['required', 'integer'],
-            'attributo' => ['required'],
+            'attributoName' => ['required'],
             'attribute_id' => ['required', 'integer'],
             'quantidade' => ['required', 'integer'],
             

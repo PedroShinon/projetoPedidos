@@ -27,7 +27,7 @@ class CartResource extends JsonResource
             'atributo' => ProductAttributeResource::make($this->whenLoaded('prodAtributo')),
 
             'image' => $this->image,
-            'attributo' => $this->attributo,
+            'attributoName' => $this->attributoName,
             'quantidade' => $this->quantidade,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

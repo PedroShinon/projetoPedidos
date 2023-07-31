@@ -34,7 +34,7 @@ class ProductCreateRequest extends FormRequest
             'preco_atual' => ['required', 'decimal:2'],
             'destaque' => ['nullable'],
             'status' => ['nullable'],
-            'image.*' =>['nullable', 'image', 'mimes:jpeg,png,jpg,svg,gif', 'max:5120']
+            'image.*' =>['nullable', 'image', 'mimes:jpeg,png,jpg,svg,gif', 'max:12000']
         ];
     }
 }

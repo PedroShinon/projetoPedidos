@@ -49,7 +49,7 @@ class CartService {
         $cart->user_id = $request->user()->id;
         $cart->image = $request->image;
         $cart->product_id = $request->product_id;
-        $cart->attributo = $request->attributo;
+        $cart->attributoName = $request->attributoName;
         $cart->attribute_id = $request->attribute_id;
         $cart->quantidade = $request->quantidade;
         $cart->save();
