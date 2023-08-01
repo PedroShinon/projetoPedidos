@@ -71,7 +71,7 @@ class OrderService {
 
                     //dd($message);
 
-                    return false;
+                    return ['message' => $message];
                 }
             }
         } else {
@@ -135,7 +135,7 @@ class OrderService {
             return false;
         }
 
-        $request->user()->cartItems()->delete();
+       $request->user()->cartItems()->delete();
         return $ordem;
 
     }
