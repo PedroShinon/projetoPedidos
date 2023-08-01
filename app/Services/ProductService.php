@@ -9,6 +9,7 @@ use App\Models\AttributeValue;
 use App\Models\Category;
 use Illuminate\Support\Facades\Hash;
 use App\Filter\v1\Product\ProductQuery;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 
 
@@ -53,11 +54,15 @@ class ProductService {
                 $filename = time().$i++.'.'.$extension;
                 
                 //verificar se existe directory
-                //if (!File::isDirectory($uploadPath)) {
-                //    File::makeDirectory($uploadPath, 0777, true, true);
-                //}
+                if (!File::isDirectory($uploadPath)) {
+                    
+                    Storage::makeDirectory($uploadPath, 0777);
+                   //File::makeDirectory($uploadPath, 0777, true, true);
+                }
                 //stocar file
-                $imageFile->move($uploadPath, $filename);
+                Storage::putFile();
+                //$imageFile->move($uploadPath, $filename);
+                //$imageFile->move($uploadPath, $filename);
 
                 $finalImagePathName = $uploadPath.$filename;
 

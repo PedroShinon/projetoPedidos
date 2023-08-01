@@ -750,7 +750,7 @@ Ato GET ONE USER (ATUALIZAR) USUÁRIO:
     ################## CREATE ###########################
     Ato CRIAR ATRIBUTO DO PRODUTO INDIVIDUALMENTE NO SISTEMA:
 	VERBOSE: POST    
-    URL: http://127.0.0.1:8000/api/v1/attributeValues
+    URL: http://127.0.0.1:8000/api/v1/productAttributes
 
     EXEMPLO DE ENVIO CORRETO EM JSON:
     {
