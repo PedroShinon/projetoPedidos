@@ -61,20 +61,18 @@ class OrderService {
 
                 //dd($produto);
 
-                
-
                 $produtoEmEstoque = ProductAttribute::where('id', $produto['attribute_id'])->first();
 
                 //dd($produtoEmEstoque);
 
                 if($produtoEmEstoque['quantidade'] < $produto['quantidade']){
                     
-                    $message = 'O produto: ' . $produtoEmEstoque->product->nome . ' tem apenas ' . $produtoEmEstoque['quantidade'] .
+                    $message = 'O produto: ' . $produtoEmEstoque->product->nome . ' ' . $produto['attributoName'] . ' têm apenas ' . $produtoEmEstoque['quantidade'] .
                     ' unidades em estoque';
 
                     //dd($message);
 
-                    return false;
+                    return ['message' => $message, 'status' => 404];
                 }
             }
         } else {
