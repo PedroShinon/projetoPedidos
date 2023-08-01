@@ -1416,6 +1416,7 @@ Ato GET ONE USER (ATUALIZAR) USUÁRIO:
     ################## CREATE ###########################
     Ato CRIAR PEDIDOS NO SISTEMA:
 	VERBOSE: POST    
+    StatusUpdateByUser
     URL: http://127.0.0.1:8000/api/v1/orders
 
     EXEMPLO A SER ENVIADO:
@@ -1436,6 +1437,35 @@ Ato GET ONE USER (ATUALIZAR) USUÁRIO:
             quantidade: 15
         }
     ]
+
+
+    ################### PEDIDOS ##########################
+    
+    ################## CREATE ###########################
+    Ato ATUALIZAR DADOS DO PEDIDO NO SISTEMA:
+	VERBOSE: POST    
+    URL: http://127.0.0.1:8000/api/v1/StatusUpdateByUser/:ID
+
+
+    RECEBIMENTO EM CASO DE SUCESSO:
+    {
+        "data"': {
+            "id": 7,
+            "user_id": 1,
+            "loja_id": 1,
+            "tracking_code": "eBiXqttm:1690907675LID:1",
+            "nome_completo": "maria",
+            "endereco": " Cidade: São Luís, Bairro: cohab, Logradouro: Rua 14, número: 03, Estado: SP",
+            "email": "mar@email.com",
+            "numero_tel": "98983344833",
+            "pincode": "8957",
+            "status_pedidos": "Recebido",
+            "quantidade": 2,
+            "preco_total": "1967.92",
+            "created_at": "2023-08-01T16:34:35.000000Z",
+            "updated_at": "2023-08-01T20:57:34.000000Z"
+        }'
+    }
 
 }
 

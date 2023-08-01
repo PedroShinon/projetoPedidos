@@ -146,6 +146,8 @@ class OrderService {
         return $ordem = Order::where('id', $id)->with('items')->first();
     }
 
+
+    
     public function update($request, $id)
     {
 
@@ -167,7 +169,6 @@ class OrderService {
 
     public function StatusUpdateByUser($id)
     {
-
       $ordem = Order::find($id);
       if($ordem){
 
