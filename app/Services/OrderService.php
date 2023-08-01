@@ -135,7 +135,7 @@ class OrderService {
             return false;
         }
 
-        //$request->user()->cartItems()->delete();
+        $request->user()->cartItems()->delete();
         return $ordem;
 
     }
