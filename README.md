@@ -1311,6 +1311,132 @@ Ato GET ONE USER (ATUALIZAR) USUÁRIO:
     OBS: MÉTODO SEGURO DE RECUPERAR APENAS OS PEDIDOS DO PRÓPRIO USUARIO LOGADO.
 	VERBOSE: GET    
     URL: http://127.0.0.1:8000/api/v1/getOrdersLinkedToUser
+
+
+
+
+    ################### PEDIDOS ##########################
+    
+    ################## GET ###########################
+    Ato COLETAR PEDIDOS  NO SISTEMA:
+	VERBOSE: GET    
+    URL: http://127.0.0.1:8000/api/v1/orders
+
+    RESPOSTA EM CASO DE ORDENS RECUPERADAS COM SUCESSO:
+
+    {
+        "data": [
+            {
+                "id": 6,
+                "user_id": 1,
+                "loja_id": 1,
+                "tracking_code": "1aixSgtm:1690834043LID:1",
+                "nome_completo": "maria",
+                "endereco": " Cidade: São Luís, Bairro: cohab, Logradouro: Rua 14, número: 03, Estado: SP",
+                "email": "mar@email.com",
+                "numero_tel": "98983344833",
+                "pincode": "1359",
+                "status_pedidos": "Em verificação",
+                "quantidade": 2,
+                "preco_total": "1967.92",
+                "created_at": "2023-07-31T20:07:23.000000Z",
+                "updated_at": "2023-07-31T20:07:23.000000Z",
+                "items": [
+                    {
+                        "id": 11,
+                        "order_id": 6,
+                        "product_id": 1,
+                        "attribute_id": 2,
+                        "nome": "Bateria Samsung v12 s20 edge amarelo",
+                        "quantidade": 4,
+                        "preco": "1363.96",
+                        "created_at": "2023-07-31T20:07:23.000000Z",
+                        "updated_at": "2023-07-31T20:07:23.000000Z"
+                    },
+                    {
+                        "id": 12,
+                        "order_id": 6,
+                        "product_id": 2,
+                        "attribute_id": 4,
+                        "nome": "Frontal Motorola v12 s20 edge cinza",
+                        "quantidade": 4,
+                        "preco": "603.96",
+                        "created_at": "2023-07-31T20:07:23.000000Z",
+                        "updated_at": "2023-07-31T20:07:23.000000Z"
+                    }
+                ]
+            },
+            {
+                "id": 7,
+                "user_id": 1,
+                "loja_id": 1,
+                "tracking_code": "eBiXqttm:1690907675LID:1",
+                "nome_completo": "maria",
+                "endereco": " Cidade: São Luís, Bairro: cohab, Logradouro: Rua 14, número: 03, Estado: SP",
+                "email": "mar@email.com",
+                "numero_tel": "98983344833",
+                "pincode": "8957",
+                "status_pedidos": "Em verificação",
+                "quantidade": 2,
+                "preco_total": "1967.92",
+                "created_at": "2023-08-01T16:34:35.000000Z",
+                "updated_at": "2023-08-01T16:34:35.000000Z",
+                "items": [
+                    {
+                        "id": 13,
+                        "order_id": 7,
+                        "product_id": 1,
+                        "attribute_id": 2,
+                        "nome": "Bateria Samsung v12 s20 edge amarelo",
+                        "quantidade": 4,
+                        "preco": "1363.96",
+                        "created_at": "2023-08-01T16:34:35.000000Z",
+                        "updated_at": "2023-08-01T16:34:35.000000Z"
+                    },
+                    {
+                        "id": 14,
+                        "order_id": 7,
+                        "product_id": 2,
+                        "attribute_id": 4,
+                        "nome": "Frontal Motorola v12 s20 edge cinza",
+                        "quantidade": 4,
+                        "preco": "603.96",
+                        "created_at": "2023-08-01T16:34:35.000000Z",
+                        "updated_at": "2023-08-01T16:34:35.000000Z"
+                    }
+                ]
+            }
+        ]
+    }
+
+
+
+    ################### PEDIDOS ##########################
+    
+    ################## CREATE ###########################
+    Ato CRIAR PEDIDOS NO SISTEMA:
+	VERBOSE: POST    
+    URL: http://127.0.0.1:8000/api/v1/orders
+
+    EXEMPLO A SER ENVIADO:
+
+    loja_id:                1,
+    productsInCart: [
+        {
+            product_id: 1,
+            attributoName: 'verde',
+            attribute_id: 2,
+            quantidade: 20
+        },
+
+        {
+            product_id: 2,
+            attributoName: 'azul',
+            attribute_id: 1,
+            quantidade: 15
+        }
+    ]
+
 }
 
 
