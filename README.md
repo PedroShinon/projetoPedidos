@@ -828,7 +828,7 @@ Ato GET ONE USER (ATUALIZAR) USUÁRIO:
     ################## UPDATE ###############################
     Ato ATUALIZAR ATRIBUTO DO PRODUTO INDIVIDUALMENTE NO SISTEMA:
 	VERBOSE: PUT    
-    URL: http://127.0.0.1:8000/api/v1/attributeValues/:id
+    URL: http://127.0.0.1:8000/api/v1/productAttributes/:id
 
     CASO DE DADOS CORRETOS A SEREM ENVIADOS EM JSON:
         {  
@@ -855,7 +855,7 @@ Ato GET ONE USER (ATUALIZAR) USUÁRIO:
     ################## DELETE ###############################
     Ato DELETAR ATRIBUTO DO PRODUTO INDIVIDUALMENTE NO SISTEMA:
 	VERBOSE: DELETE    
-    URL: http://127.0.0.1:8000/api/v1/attributeValues/:id
+    URL: http://127.0.0.1:8000/api/v1/productAttributes/:id
 
     EM CASO DE ID SOLICITADO EXISTIR:
 
@@ -870,7 +870,7 @@ Ato GET ONE USER (ATUALIZAR) USUÁRIO:
     ################## GET ALL ###############################
     Ato DELETAR ATRIBUTO DO PRODUTO INDIVIDUALMENTE NO SISTEMA:
 	VERBOSE: GET    
-    URL: http://127.0.0.1:8000/api/v1/attributeValues
+    URL: http://127.0.0.1:8000/api/v1/productAttributes
     SE NECESSÁRIO PODE SER PROVISIONADO PARAMETROS DE FILTRO AO GET APOS A '?'.
 
 
@@ -888,7 +888,7 @@ Ato GET ONE USER (ATUALIZAR) USUÁRIO:
     ################## CREATE ###########################
     Ato CRIAR IMAGEM DO PRODUTO INDIVIDUALMENTE NO SISTEMA:
 	VERBOSE: POST    
-    URL: http://127.0.0.1:8000/api/v1/attributeValues
+    URL: http://127.0.0.1:8000/api/v1/productsImages
 
     EXEMPLO DE ENVIO CORRETO EM JSON:
     {
@@ -979,32 +979,6 @@ Ato GET ONE USER (ATUALIZAR) USUÁRIO:
     }
 
 
-
-    ################## UPDATE ################################
-    Ato ATUALIZAR IMAGEM DO PRODUTO INDIVIDUALMENTE NO SISTEMA:
-	VERBOSE: PUT    
-    URL: http://127.0.0.1:8000/api/v1/productsImages/:id
-
-    CASO DE DADOS CORRETOS A SEREM ENVIADOS EM JSON:
-        {  
-            "quantidade": 2,
-            "nome": "violeta"
-        }
-
-    RETORNO EM OCASIÃO CORRETA:
-    {
-    "data": {
-        "id": 63,
-        "product_id": 11,
-        "quantidade": 20,
-        "nome": "violeta",
-        "created_at": "2023-07-24T19:04:47.000000Z",
-        "updated_at": "2023-07-24T19:16:52.000000Z"
-    }
-    RETORNO EM ID DO ATRIBUTO NÃO ENCONTRADO:
-    {
-        "message": "dado não foi encontrado"
-    }
 
 
     ################## DELETE ###############################
