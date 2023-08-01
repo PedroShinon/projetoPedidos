@@ -55,7 +55,7 @@ Route::prefix('v1')->group(function(){
         //order
         Route::apiResource('/orders', OrderController::class);
         Route::get('/getOrdersLinkedToUser',[OrderController::class, 'getOrdersLinkedToUser']);
-        Route::put('/StatusUpdateByUser',[OrderController::class, 'StatusUpdateByUser']);
+        Route::post('/StatusUpdateByUser/{id}',[OrderController::class, 'StatusUpdateByUser']);
 
         
 

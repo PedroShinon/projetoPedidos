@@ -11,7 +11,7 @@ class OrderUpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class OrderUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'loja_id' => ['sometimes'],
+            'nome_completo' => ['sometimes'],
+            'status_pedidos' => ['sometimes'],
+            'preco_total' => ['sometimes', 'numeric']
         ];
     }
 }

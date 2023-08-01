@@ -84,7 +84,6 @@ class OrderController extends Controller
 
     public function StatusUpdateByUser(string $id)
     {
-        $request->validated();
         if($order = $this->orderService->StatusUpdateByUser($id)){
             return OrderResource::make($order)->response()->setStatusCode(202); 
         }

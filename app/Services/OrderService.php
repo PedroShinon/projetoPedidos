@@ -150,6 +150,7 @@ class OrderService {
     {
 
       $ordem = Order::find($id);
+
       if($ordem){
 
         $ordem->loja_id = $request->loja_id ?? $ordem->loja_id;
