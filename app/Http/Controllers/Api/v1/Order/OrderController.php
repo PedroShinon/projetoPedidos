@@ -44,14 +44,15 @@ class OrderController extends Controller
         
         if(!$order = $this->orderService->create($request))
         {
+
             return response()->json(['message' => 'não foi possivel criar o pedido'], 403);
 
         } 
         //if (isset($order['message'])) {
         //    return response()->json(['message' => $order['message']], 403);
         //}
-           
-        return OrderResource::collection($order)->response()->setStatusCode(201);
+        return response()->json($order, 403);
+        //return OrderResource::make($order)->response()->setStatusCode(201);
         
     }
 
