@@ -49,15 +49,15 @@ class OrderService {
     {
         //pegar produtos do carrinho
         //$produtosNoCart = $request->user()->cartItems()->get();
-        $produtosNoCart = $request->productsInCart;
+        $request->productsInCart;
         //dd($produtosNoCart);
         //pegar produtos no estoque
         //$produtoEmEstoque = ProductAttribute::whereIn('id', $produtosNoCart->pluck('attribute_id'))->get();
         //dd($produtoEmEstoque);
             
         //checar se quantidades em estoque são maiores que a da compra.
-        if($produtosNoCart){
-            foreach ($produtosNoCart as $produto) {
+        if($request->productsInCart){
+            foreach ($request->productsInCart as $produto) {
 
                 //dd($produto);
 
@@ -106,7 +106,7 @@ class OrderService {
         if ($ordem) {
 
             //criacao
-            foreach ($produtosNoCart as $produto) {
+            foreach ($request->productsInCart as $produto) {
                 //dd($produto);
 
                 if($prodAtual = Product::where('id', $produto['product_id'])->first()){
