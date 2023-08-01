@@ -143,7 +143,7 @@ class OrderService {
 
     public function getById($id)
     {
-        return Order::find($id);
+        return $ordem = Order::where('id', $id)->with('items')->first();
     }
 
     public function update($request, $id)

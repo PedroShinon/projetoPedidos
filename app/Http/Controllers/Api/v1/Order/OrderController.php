@@ -66,6 +66,7 @@ class OrderController extends Controller
         if(!$order = $this->orderService->getById($id)){
             return response()->json(['message' => 'Nenhum dado encontrado'], 404);  
          }
+         
          return OrderResource::make($order)->response()->setStatusCode(200); 
     }
 
