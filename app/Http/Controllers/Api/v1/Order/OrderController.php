@@ -41,11 +41,17 @@ class OrderController extends Controller
      */
     public function store(OrderCreateRequest $request)
     {
-        if(!$order = $this->orderService->create($request))
+        $order = $this->orderService->create($request);
+        if($order === false)
         {
             return response()->json(['message' => 'não foi possivel criar o pedido'], 403);
-        }
-        return OrderResource::make($order)->response()->setStatusCode(201);
+
+        } 
+
+            return OrderResource::make($order)->response()->setStatusCode(201);
+
+        
+        
     }
 
     /**

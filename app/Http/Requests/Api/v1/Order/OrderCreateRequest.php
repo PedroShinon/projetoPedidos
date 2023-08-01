@@ -23,7 +23,7 @@ class OrderCreateRequest extends FormRequest
     {
         //dd($this->request);
         return [
-            //
+            'productsInCart' => ['required']
         ];
     }
 }

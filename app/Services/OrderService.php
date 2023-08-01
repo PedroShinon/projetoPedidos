@@ -65,6 +65,12 @@ class OrderService {
                 $produtoEmEstoque = ProductAttribute::where('id', $produto['attribute_id'])->first();
 
                 if($produtoEmEstoque['quantidade'] < $produto['quantidade']){
+                    
+                    $message = 'O produto: ' . $produtoEmEstoque->product->nome . ' tem apenas ' . $produtoEmEstoque['quantidade'] .
+                    ' unidades em estoque';
+
+                    //dd($message);
+
                     return false;
                 }
             }
@@ -72,7 +78,7 @@ class OrderService {
             return false;
         }
 
-
+        //criar Ordem
         $endereco = ' Cidade: ' . $request->user()->cidade . ', Bairro: ' .$request->user()->bairro . ', Logradouro: ' .
             $request->user()->logradouro . ', número: ' . $request->user()->numero . ', Estado: ' . $request->user()->uf;
 
