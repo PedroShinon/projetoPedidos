@@ -53,9 +53,9 @@ class ProductService {
                 $filename = time().$i++.'.'.$extension;
                 
                 //verificar se existe directory
-                if (!File::isDirectory($uploadPath)) {
-                    File::makeDirectory($uploadPath, 0777, true, true);
-                }
+                //if (!File::isDirectory($uploadPath)) {
+                //    File::makeDirectory($uploadPath, 0777, true, true);
+                //}
                 //stocar file
                 $imageFile->move($uploadPath, $filename);
 
