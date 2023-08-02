@@ -81,10 +81,11 @@ class BannerService {
     public function deleteBanner($id): void
     {
         if ($imagem = Banner::where('id', $id)->first()) {
-            if(File::exists($imagem->image)){
-                File::delete($imagem->image);
+            if (Storage::disk('s3')->exists($imagem->image)) {
+                    Storage::disk('s3')->delete($imagem->image);
             }
         }
+        
         $imagem->delete();
     }
 }

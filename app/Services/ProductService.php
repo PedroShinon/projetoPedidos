@@ -156,8 +156,8 @@ class ProductService {
         $imagens = ProductImage::where('product_id', $id)->get();
         if (count($imagens) > 0) {
             foreach ($imagens as $imagem) {
-                if(File::exists($imagem->image)){
-                    File::delete($imagem->image);
+                if (Storage::disk('s3')->exists($imagem->image)) {
+                    Storage::disk('s3')->delete($imagem->image);
                 }
             }
         }
