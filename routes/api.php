@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\v1\ProductAttribute\ProductAttributeController;
 use App\Http\Controllers\Api\v1\Order\OrderController;
 use App\Http\Controllers\Api\v1\Banner\BannerController;
 use App\Http\Controllers\Api\v1\Cart\CartController;
+use App\Http\Controllers\Api\v1\Dashboard\DashboardController;
 
 
 /*
@@ -56,6 +57,10 @@ Route::prefix('v1')->group(function(){
         Route::apiResource('/orders', OrderController::class);
         Route::get('/getOrdersLinkedToUser',[OrderController::class, 'getOrdersLinkedToUser']);
         Route::post('/StatusUpdateByUser',[OrderController::class, 'StatusUpdateByUser']);
+
+        //Dashboard
+        Route::get('/dashboards', [DashboardController::class, 'dashboard']);
+
 
         
 
