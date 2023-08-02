@@ -167,9 +167,9 @@ class OrderService {
     }
 
 
-    public function statusUpdateByUser($id)
+    public function statusUpdateByUser($request)
     {
-      $ordem = Order::find($id);
+      $ordem = Order::find($request->id);
       if($ordem){
 
         $ordem->status_pedidos = "Recebido";

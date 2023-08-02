@@ -82,9 +82,9 @@ class OrderController extends Controller
         return response()->json(['message' => 'dado não foi encontrado'], 404); 
     }
 
-    public function StatusUpdateByUser(string $id)
+    public function StatusUpdateByUser(Request $request)
     {
-        if($order = $this->orderService->statusUpdateByUser($id)){
+        if($order = $this->orderService->statusUpdateByUser($request)){
             return OrderResource::make($order)->response()->setStatusCode(202); 
         }
         return response()->json(['message' => 'dado não foi encontrado'], 404); 
