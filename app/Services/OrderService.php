@@ -167,7 +167,7 @@ class OrderService {
     }
 
 
-    public function StatusUpdateByUser($id)
+    public function statusUpdateByUser($id)
     {
       $ordem = Order::find($id);
       if($ordem){

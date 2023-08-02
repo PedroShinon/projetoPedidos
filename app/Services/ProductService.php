@@ -54,13 +54,13 @@ class ProductService {
                 $filename = time().$i++.'.'.$extension;
                 
                 //verificar se existe directory
-                if (!File::isDirectory($uploadPath)) {
-                    
-                    Storage::makeDirectory($uploadPath, 0777);
+                //if (!File::isDirectory($uploadPath)) {
+                //    
+                //    Storage::makeDirectory($uploadPath, 0777);
                    //File::makeDirectory($uploadPath, 0777, true, true);
-                }
+                //}
                 //stocar file
-                Storage::putFile();
+                $imageFile->storeAs($uploadPath, $filename, 's3');
                 //$imageFile->move($uploadPath, $filename);
                 //$imageFile->move($uploadPath, $filename);
 

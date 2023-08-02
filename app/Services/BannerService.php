@@ -43,13 +43,13 @@ class BannerService {
 
                 
                 //verificar se existe directory
-                if (!File::isDirectory($uploadPath)) {
+                //if (!File::isDirectory($uploadPath)) {
                     
-                    Storage::makeDirectory($uploadPath, 0777);
+                //    Storage::makeDirectory($uploadPath, 0777);
                    //File::makeDirectory($uploadPath, 0777, true, true);
-                }
+                //}
                 //stokar file
-                $imageFile->move($uploadPath, $filename);
+                $imageFile->storeAs($uploadPath, $filename, 's3');
 
                 $finalImagePathName = $uploadPath.$filename;
 
