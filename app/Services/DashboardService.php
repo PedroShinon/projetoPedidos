@@ -50,13 +50,12 @@ class DashboardService {
 
         //Pegar valor vendido do dia e do mes de cada orderItems.
 
-        $itensDeOrdens = Order::where('loja_id', $request->user()->id)->whereDate('created_at', $dataHoje)->get();
+        $itensDeOrdens = Order::where('loja_id', $request->user()->id)->where('status_pedidos','Recebido')->whereDate('created_at', $dataHoje)->get();
 
-        $itensDeOrdensDoMes = Order::where('loja_id', $request->user()->id)->whereMonth('created_at', $dataEsteMes)->get();
+        $itensDeOrdensDoMes = Order::where('loja_id', $request->user()->id)->where('status_pedidos','Recebido')->whereMonth('created_at', $dataEsteMes)->get();
 
 
         $vendaDoDia = 0;
-        $vendaDoMes = 0;
         foreach ($itensDeOrdens as $item) {
             $vendaDoDia += $item['preco_total'];
         }
