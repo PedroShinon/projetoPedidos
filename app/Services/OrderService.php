@@ -20,10 +20,10 @@ class OrderService {
         $queryItems = $filter->transform($request); //[['column', 'operator', 'value']]
 
         if (count($queryItems) == 0) {
-            $ordem = Order::with('items')->get();
+            $ordem = Order::with('items')->orderBy('created_at', 'desc')->get();
             return $ordem;
         } else {
-            $ordem = Order::with('items')->where($queryItems)->get();
+            $ordem = Order::with('items')->orderBy('created_at', 'desc')->where($queryItems)->get();
             return $ordem;
         }
     }
@@ -37,10 +37,10 @@ class OrderService {
         //dd($pagi);
 
         if (count($queryItems) == 0) {
-            $orders = $request->user()->orders()->with('items')->limit($limit)->get();
+            $orders = $request->user()->orders()->with('items')->orderBy('created_at', 'desc')->limit($limit)->get();
             return $orders;
         } else {
-            $orders = $request->user()->orders()->with('items')->where($queryItems)->get();
+            $orders = $request->user()->orders()->with('items')->orderBy('created_at', 'desc')->where($queryItems)->get();
             return $orders;
         }
     }

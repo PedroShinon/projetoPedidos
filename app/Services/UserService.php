@@ -16,10 +16,10 @@ class UserService {
         $queryItems = $filter->transform($request); //[['column', 'operator', 'value']]
 
         if (count($queryItems) == 0) {
-            $users = User::all();
+            $users = User::orderBy('created_at', 'desc')->get();
             return $users;
         } else {
-            $users = User::where($queryItems)->get();
+            $users = User::orderBy('created_at', 'desc')->where($queryItems)->get();
             return $users;
         }
     }
@@ -28,7 +28,7 @@ class UserService {
 
         $dataEsteMes = Carbon::now()->month;
         $dataEsteAno = Carbon::now()->format('Y');
-        $usersDesseMes = Order::whereMonth('created_at', $dataEsteMes)->whereYear('created_at', $dataEsteAno)->get();
+        $usersDesseMes = Order::whereMonth('created_at', $dataEsteMes)->orderBy('created_at', 'desc')->whereYear('created_at', $dataEsteAno)->get();
         return $usersDesseMes;
 
     }
