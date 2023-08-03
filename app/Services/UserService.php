@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Filter\v1\User\UserQuery;
+use Illuminate\Support\Carbon;
 
 
 class UserService {
@@ -21,6 +22,15 @@ class UserService {
             $users = User::where($queryItems)->get();
             return $users;
         }
+    }
+
+    public function usersRegisteredsThisMonth(){
+
+        $dataEsteMes = Carbon::now()->month;
+        $dataEsteAno = Carbon::now()->format('Y');
+        $usersDesseMes = Order::whereMonth('created_at', $dataEsteMes)->whereYear('created_at', $dataEsteAno)->get();
+        return $usersDesseMes;
+
     }
 
     public function getById($id)

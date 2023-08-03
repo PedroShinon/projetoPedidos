@@ -62,6 +62,9 @@ Route::prefix('v1')->group(function(){
         Route::get('/dashboards', [DashboardController::class, 'dashboard']);
         Route::get('/dashboardAllData', [DashboardController::class, 'dashboardAllData']);
 
+        //usersRegisteredsThisMonth
+        Route::get('/usersRegisteredsThisMonth', [UserController::class, 'usersRegisteredsThisMonth']);
+
 
         
 

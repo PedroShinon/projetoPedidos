@@ -31,6 +31,12 @@ class UserController extends Controller
         return UserResource::make(['message' => 'Usuarios coletados','data' => $users])->response()->setStatusCode(200);
     }
 
+    public function usersRegisteredsThisMonth()
+    {
+        $users = $this->userService->usersRegisteredsThisMonth($request);
+        return UserResource::make(['message' => 'Usuarios coletados','data' => $users])->response()->setStatusCode(200);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
