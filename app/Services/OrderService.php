@@ -3,12 +3,15 @@
 namespace App\Services;
 
 use App\Models\Order;
+use App\Models\User;
 use App\Models\Product;
 use App\Models\ProductAttribute;
 use App\Models\OrderItem;
 use Illuminate\Support\Facades\Hash;
 use App\Filter\v1\Order\OrderQuery;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\CompraRealizada;
 
 class OrderService {
 
@@ -122,6 +125,8 @@ class OrderService {
                     'preco' => $prodAtual['preco_atual'] * $produto['quantidade']
                     ]);
 
+
+
                 } else {
                     $ordem->delete();
                     return 'produto não está mais disponível ou não pôde ser encontrado';
@@ -132,11 +137,19 @@ class OrderService {
                 'preco_total' => $this->precototal
             ]);
 
+            //enviar email anunciando compra
+            try {
+                $loja = User::where('id', $request->loja_id)->first();
+                Mail::to($loja->email)->send(new CompraRealizada($request, $ordem));
+            } catch (\Exception $th) {
+                        //throw $th;
+            }
+
         } else {
             return false;
         }
 
-       $request->user()->cartItems()->delete();
+       //$request->user()->cartItems()->delete();
         return $ordem;
 
     }
