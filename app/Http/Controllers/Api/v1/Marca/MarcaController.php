@@ -17,6 +17,8 @@ class MarcaController extends Controller
     public function __construct(protected MarcaService $service)
     {
         $this->marcaService = $service;
+
+        $this->middleware(['auth:sanctum', 'ability:admin_privilege'])->only(['store', 'update', 'destroy']);
     }
     /**
      * Display a listing of the resource.

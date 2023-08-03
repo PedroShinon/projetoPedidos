@@ -19,6 +19,8 @@ class UserController extends Controller
     public function __construct(protected UserService $service)
     {
         $this->userService = $service;
+
+        $this->middleware(['auth:sanctum', 'ability:admin_privilege'])->only('store');
     }
     /**
      * Display a listing of the resource.

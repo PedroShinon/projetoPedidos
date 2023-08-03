@@ -16,6 +16,8 @@ class CategoryController extends Controller
     public function __construct(protected CategoryService $service)
     {
         $this->categoryService = $service;
+
+        $this->middleware(['auth:sanctum', 'ability:admin_privilege'])->only(['store', 'update', 'destroy']);
     }
     /**
      * Display a listing of the resource.

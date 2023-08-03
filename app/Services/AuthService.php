@@ -5,6 +5,9 @@ namespace App\Services;
 use App\Models\User;
 use App\Models\Endereco;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Events\UserRegistered;
+use App\Events\PermissionChanged;
 
 class AuthService {
 
@@ -29,6 +32,14 @@ class AuthService {
         ]);
 
         //AREA QUE MANDA EMAIL INFORMANDO QUE FOI CRIADO
+        try {
+            event(new UserRegistered($user->email));
+        } catch (\Exception $th) {
+            //throw $th;
+        }
+        
+
+        //Mail::to($user->email)->send(new registered());
            
         return ['message' => 'Usuario criado',
                 'status' => 201,
@@ -88,6 +99,12 @@ class AuthService {
                         'permissao' => 1
                     ]);
                     // AREA QUE ENVIA EMAIL INFORMANDO DA TROCA DE PERMISSAO 
+                    try {
+                       event(new PermissionChanged($user->email));
+                    } catch (\Exception $t) {
+                    }
+                    
+                    //Mail::to($user->email)->send(new permission());
 
                 } else {
                     $user->update([

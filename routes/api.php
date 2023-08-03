@@ -60,6 +60,7 @@ Route::prefix('v1')->group(function(){
 
         //Dashboard
         Route::get('/dashboards', [DashboardController::class, 'dashboard']);
+        Route::get('/dashboardAllData', [DashboardController::class, 'dashboardAllData']);
 
 
         

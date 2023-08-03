@@ -17,6 +17,8 @@ class ProductImageController extends Controller
     public function __construct(protected ProductImageService $service)
     {
         $this->productImageService = $service;
+
+        $this->middleware(['auth:sanctum', 'ability:admin_privilege'])->only(['store', 'destroy']);
     }
     /**
      * Display a listing of the resource.

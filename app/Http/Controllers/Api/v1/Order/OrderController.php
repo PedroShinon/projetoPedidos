@@ -16,6 +16,8 @@ class OrderController extends Controller
     public function __construct(protected OrderService $service)
     {
         $this->orderService = $service;
+
+        $this->middleware(['auth:sanctum', 'ability:admin_privilege'])->only(['destroy']);
     }
     /**
      * Display a listing of the resource.

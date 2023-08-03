@@ -17,6 +17,8 @@ class ProductAttributeController extends Controller
     public function __construct(protected ProductAttributeService $service)
     {
         $this->productAttributeService = $service;
+
+        $this->middleware(['auth:sanctum', 'ability:admin_privilege'])->only(['store', 'update', 'destroy']);
     }
     /**
      * Display a listing of the resource.

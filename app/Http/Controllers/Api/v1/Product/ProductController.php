@@ -17,6 +17,8 @@ class ProductController extends Controller
     public function __construct(protected ProductService $service)
     {
         $this->productService = $service;
+
+        $this->middleware(['auth:sanctum', 'ability:admin_privilege'])->only(['store', 'update', 'destroy']);
     }
 
     /**

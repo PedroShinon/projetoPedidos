@@ -15,6 +15,8 @@ class BannerController extends Controller
     public function __construct(protected BannerService $service)
     {
         $this->bannerService = $service;
+
+        $this->middleware(['auth:sanctum', 'ability:admin_privilege'])->only(['store', 'destroy']);
     }
     /**
      * Display a listing of the resource.
