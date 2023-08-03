@@ -1467,6 +1467,55 @@ Ato GET ONE USER (ATUALIZAR) USUÁRIO:
         }'
     }
 
+
+
+    ################### Dashboard ##########################
+    
+    ################## GET ###########################
+    Ato DADOS ANALITICOS NO SISTEMA:
+	VERBOSE: GET    
+    
+    URL: http://127.0.0.1:8000/api/v1/dashboards
+
+    DADOS RECEBIDOS:
+    {
+    "message": "dados resgatados",
+        "data": {
+            "totalDeProdutos": 9,
+            "totalDePedidos": 4,
+            "totalDeUsuarios": 12,
+            "totalDeAdmins": 1,
+            "ordensDeHoje": 0,
+            "ordensDoMes": 3,
+            "vendaDoDia": 0,
+            "vendaDoMes": 5903.76
+        }
+    }
+
+
+
+    ################## GET ###########################
+    Ato DADOS ANALITICOS NO SISTEMA DE TODAS AS LOJAS:
+	VERBOSE: GET    
+    
+    URL: http://127.0.0.1:8000/api/v1/dashboardAllData
+
+    DADOS RECEBIDOS:
+
+    {
+    "message": "dados resgatados",
+        "data": {
+            "totalDeProdutos": 9,
+            "totalDePedidos": 4,
+            "totalDeUsuarios": 12,
+            "totalDeAdmins": 1,
+            "ordensDeHoje": 0,
+            "ordensDoMes": 4,
+            "vendaDoDia": 0,
+            "vendaDoMes": 7871.68
+        }
+    }
+
 }
 
 
