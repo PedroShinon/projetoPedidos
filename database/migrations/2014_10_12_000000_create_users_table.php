@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nome', 100);
             $table->string('nome_loja', 100);
-            $table->string('cnpj_cpf')->unique();
+            $table->string('cnpj_cpf');
             $table->string('telefone', 20);
             $table->string('email', 100)->unique();
 

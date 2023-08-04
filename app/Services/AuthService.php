@@ -50,7 +50,7 @@ class AuthService {
 
     public function login($request)
     {
-        $user = User::where('cnpj_cpf', $request->cnpj_cpf)->first();
+        $user = User::where('email', $request->email)->first();
         if ($user) {
             if ($user->permissao == true) {
                 $user->tokens()->delete();

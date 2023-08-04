@@ -199,7 +199,7 @@ Ato LOGAR USUÁRIO:
 	DADOS ENVIADOS ACEITOS (exemplo json format):
 
     {
-       "cnpj_cpf": "90280494313" 
+       "email": "pedro@email.com"
     }
 		
 
