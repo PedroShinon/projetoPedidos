@@ -49,6 +49,9 @@ Route::prefix('v1')->group(function(){
         Route::apiResource('/productAttributes', ProductAttributeController::class);
         Route::apiResource('/banners', BannerController::class);
 
+        //produtos com baixo estoque
+        Route::get('/getLowStockProducts', [ProductController::class, 'getLowStocks']);
+
         //cart
         Route::apiResource('/carts', CartController::class);
         Route::get('/getCartsLinkedToUser',[CartController::class, 'getCartsLinkedToUser']);

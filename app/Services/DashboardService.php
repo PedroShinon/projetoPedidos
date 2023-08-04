@@ -45,7 +45,7 @@ class DashboardService {
         
         $pedidosDeHoje = Order::where('loja_id', $request->user()->id)->whereDate('created_at', $dataHoje)->count();
         $pedidosDoMes = Order::where('loja_id', $request->user()->id)->whereMonth('created_at', $dataEsteMes)->whereYear('created_at', $dataEsteAno)->count();
-        //$pedidosDoAno = Order::where('loja_id', $request->user()->id)->whereYear('created_at', $dataEsteAno)->count();
+        $pedidosDoAno = Order::where('loja_id', $request->user()->id)->whereYear('created_at', $dataEsteAno)->count();
 
 
         //Pegar valor vendido do dia e do mes de cada orderItems.
@@ -73,7 +73,7 @@ class DashboardService {
             "totalDeAdmins" => $totalDeAdmins,
             "ordensDeHoje" => $pedidosDeHoje,
             "ordensDoMes" => $pedidosDoMes,
-            //"ordensDoAno" => $pedidosDoAno,
+            "ordensDoAno" => $pedidosDoAno,
             "vendaDoDia" => $vendaDoDia,
             "vendaDoMes" => $vendaDoMes
         ];
@@ -105,7 +105,7 @@ class DashboardService {
         
         $pedidosDeHoje = Order::whereDate('created_at', $dataHoje)->count();
         $pedidosDoMes = Order::whereMonth('created_at', $dataEsteMes)->whereYear('created_at', $dataEsteAno)->count();
-        //$pedidosDoAno = Order::where('loja_id', $request->user()->id)->whereYear('created_at', $dataEsteAno)->count();
+        $pedidosDoAno = Order::where('loja_id', $request->user()->id)->whereYear('created_at', $dataEsteAno)->count();
 
 
         //Pegar valor vendido do dia e do mes de cada orderItems.
@@ -133,7 +133,7 @@ class DashboardService {
             "totalDeAdmins" => $totalDeAdmins,
             "ordensDeHoje" => $pedidosDeHoje,
             "ordensDoMes" => $pedidosDoMes,
-            //"ordensDoAno" => $pedidosDoAno,
+            "ordensDoAno" => $pedidosDoAno,
             "vendaDoDia" => $vendaDoDia,
             "vendaDoMes" => $vendaDoMes
         ];

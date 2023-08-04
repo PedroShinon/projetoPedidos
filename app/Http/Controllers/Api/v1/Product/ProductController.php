@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\ProductService;
 use App\Http\Resources\Api\v1\Product\ProductResource;
+use App\Http\Resources\Api\v1\Product\LowStockResource;
 use App\Http\Requests\Api\v1\Product\ProductCreateRequest;
 use App\Http\Requests\Api\v1\Product\ProductUpdateRequest;
 
@@ -31,6 +32,16 @@ class ProductController extends Controller
             return response()->json(['message' => 'não foi encontrado produtos'], 404);
         }
         return ProductResource::collection($products)->response()->setStatusCode(200);
+    }
+
+    public function getLowStocks(Request $request)
+    {
+        $products = $this->productService->getLowStocksProducts($request);
+        if (!$products) {
+            return response()->json(['message' => 'não foi encontrado produtos'], 404);
+        }
+        //return response()->json(['message' => 'produtos com baixo estoque', 'data' => $products], 200);
+        return LowStockResource::collection($products)->response()->setStatusCode(200);
     }
 
     /**

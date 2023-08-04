@@ -4,11 +4,13 @@ namespace App\Services;
 
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Models\ProductAttribute;
 use App\Models\Attribute;
 use App\Models\AttributeValue;
 use App\Models\Category;
 use Illuminate\Support\Facades\Hash;
 use App\Filter\v1\Product\ProductQuery;
+use App\Filter\v1\ProductAttribute\ProductAttributeQuery;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 
@@ -27,6 +29,23 @@ class ProductService {
             return $products;
         } else {
             $products = Product::with('productImages', 'attributes')->where($queryItems)->get();
+            return $products;
+        }
+    } 
+
+    public function getLowStocksProducts($request)
+    {
+        $filter = new ProductAttributeQuery();
+        $queryItems = $filter->transform($request); //[['column', 'operator', 'value']]
+
+        $minimun = $request->minimun ?? 3;
+
+        if (count($queryItems) == 0) {
+            $products = ProductAttribute::where('quantidade','<=', $minimun)->get();
+            //dd($products);
+            return $products;
+        } else {
+            $products = ProductAttribute::where('quantidade','<=', $minimun)->where($queryItems)->get();
             return $products;
         }
     }
