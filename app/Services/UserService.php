@@ -62,6 +62,11 @@ class UserService {
     public function update($request, $id)
     {
       $user = User::find($id);
+      
+
+      if($request->user()->id != $id){
+        return false; 
+     }
       if($user){
         $user->update([
             'nome' => $request->nome ?? $user->nome,

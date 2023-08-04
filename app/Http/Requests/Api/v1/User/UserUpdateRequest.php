@@ -21,8 +21,13 @@ class UserUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        $id = $this->id ?? '';
 
+        
+        $id = $this->user()->id ?? '';
+
+
+
+        
         return [
             'nome' => ['sometimes','required', 'max:100' ],
             'cnpj_cpf' => ['sometimes', 'min:11', 'max:14'],
