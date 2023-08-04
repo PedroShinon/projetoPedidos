@@ -25,7 +25,7 @@ class UserCreateRequest extends FormRequest
             'nome' => ['required', 'max:100' ],
             'nome_loja' => ['required', 'max:100'],
             'email' => ['required', 'email', 'unique:users,email', 'max:100' ],
-            'cnpj_cpf' => ['required', 'unique:users,cnpj_cpf', 'min:11', 'max:14'],
+            'cnpj_cpf' => ['required', 'min:11', 'max:14'],
             'telefone' => ['required', 'min:9' , 'max:21' ],
             'logradouro' => ['required', 'max:200'],
             'tipo_usuario' => ['required', 'min:3', 'max:7'],

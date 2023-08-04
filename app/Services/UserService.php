@@ -65,6 +65,7 @@ class UserService {
       if($user){
         $user->update([
             'nome' => $request->nome ?? $user->nome,
+            'cnpj_cpf' => $request->cnpj_cpf ?? $user->cnpj_cpf,
             'nome_loja' => $request->nome_loja ?? $user->nome_loja,
             'email' => $request->email ?? $user->email,
             'telefone' => $request->telefone ?? $user->telefone,
@@ -72,7 +73,7 @@ class UserService {
             'numero' => $request->numero ?? $user->numero,
             'bairro' => $request->bairro ?? $user->bairro,
             'cidade' => $request->cidade ?? $user->cidade,
-            'uf' => strtoupper($request->uf) ?? $user->uf
+            'uf' => $request->uf ?? $user->uf
         ]);
         return $user;
       }
