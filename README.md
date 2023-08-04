@@ -1516,6 +1516,20 @@ Ato GET ONE USER (ATUALIZAR) USUÁRIO:
         }
     }
 
+
+
+    ################## GET ###########################
+    Ato DADOS  NO SISTEMA DE TODAS AS LOJAS:
+	VERBOSE: GET    
+    
+    URL: http://127.0.0.1:8000/api/v1/getLowStockProducts
+
+    DADOS QUE PODEM SER ENVIADO NO BODY DE MANEIRA OPCIONAL:
+    {
+        "minimun": 8
+    }
+
+
 }
 
 
