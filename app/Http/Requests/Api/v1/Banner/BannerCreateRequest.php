@@ -24,7 +24,7 @@ class BannerCreateRequest extends FormRequest
         //dd($this->request);
         return [
             'nome' => ['required'],
-            'image.*' =>['required', 'image', 'mimes:jpeg,png,jpg,svg,gif', 'max:5120']
+            'image.*' =>['required', 'image', 'mimes:jpeg,png,jpg,svg,gif,webp', 'max:5120']
         ];
     }
 }

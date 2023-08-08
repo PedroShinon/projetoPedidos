@@ -97,7 +97,7 @@ class OrderService {
             $ordem->numero_tel = $request->user()->telefone;
             $ordem->pincode = random_int(1000, 9999);
             $ordem->quantidade = $request->user()->cartItems()->count();
-            $ordem->status_pedidos = "Em verificação";
+            $ordem->status_pedidos = "Em separação";
             $ordem->preco_total = 00.00;
             $ordem->save();
         } else {
