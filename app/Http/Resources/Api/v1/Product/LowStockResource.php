@@ -17,12 +17,7 @@ class LowStockResource extends JsonResource
         return [
             'id' => $this->id,
             'nomeDoProduto' => $this->product->nome,
-<<<<<<< HEAD
             'loja_id' => $this->product->user_id,
-=======
-            'loja_id' =>
-$this->product->user_id,
->>>>>>> 520f457e1a601992f4211a2fd704d171d982c5c3
             'nomeDoAtributo' => $this->nome,
             'product_id' => $this->product_id,
             'quantidade' => $this->quantidade,
